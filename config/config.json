@@ -1,0 +1,16 @@
+{
+    "development":{
+        "username": "root",
+        "password": "1150700159jo",
+        "database": "tienda",
+        "host": "localhost",
+        "dialect": "mysql"
+    },
+    "stating":{
+         "username": "root",
+        "password": "1150700159jo",
+        "database": "tienda",
+        "host": "localhost",
+        "dialect": "mysql"
+    }
+}
