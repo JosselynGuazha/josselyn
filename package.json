@@ -6,6 +6,8 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.3",
     "connect": "^3.6.6",
     "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.3",
@@ -20,6 +22,7 @@
     "mysql2": "^1.6.4",
     "nodemon": "^1.18.9",
     "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "sequelize": "^4.42.0",
     "uuid": "^3.3.2"
   }

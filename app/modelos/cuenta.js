@@ -11,7 +11,7 @@ module.exports = function (sequelize, Sequelize) {
             type: Sequelize.STRING(30)
         },
         clave: {
-            type: Sequelize.STRING(30)
+            type: Sequelize.STRING
         },
         external_id: {
             type: Sequelize.UUID

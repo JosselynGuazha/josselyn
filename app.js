@@ -3,9 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var passport   = require('passport');
 
 require('dotenv').config();
-//var passport = require('passport');
 var port = process.env.PORT || 8042;
 var flash = require('connect-flash');
 var session = require('express-session');
@@ -28,8 +28,8 @@ app.use(session({
     saveUninitialized: true
 }));
 app.use(flash()); // connect-flash para mensajes flash almacenados en la sesión
-//app.use(passport.initialize());
-//app.use(passport.session()); // sesiones de inicio de sesión persistentes
+app.use(passport.initialize());
+app.use(passport.session()); // sesiones de inicio de sesión persistentes
 
 var router = require('./config/routes.js');
 app.use('/', router);
@@ -38,6 +38,8 @@ var models = require('./app/modelos/');
 models.sequelize.sync().then( () => {
     console.log('Se ha conectado a la Base de datos');
 }).catch(err => {console.log(err, "Hubo un error");}) ;
+
+require('./config/pasaporte/passport.js')(passport, models.cuenta, models.persona, models.rol);
 
 //launch ======================================================================
 app.listen(port);
