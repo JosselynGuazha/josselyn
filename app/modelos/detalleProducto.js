@@ -14,11 +14,11 @@ module.exports=function(sequelize
         allowNull:false
     },
     precioUnitario:{
-        type: Sequelize.DOUBLE(5,5),
+        type: Sequelize.DOUBLE,
         allowNull:false
     },
    precioTotal:{
-        type: Sequelize.DOUBLE(5,5),
+        type: Sequelize.DOUBLE,
         allowNull:false
     }
     

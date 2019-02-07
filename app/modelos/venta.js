@@ -17,16 +17,16 @@ module.exports = function (sequelize, Sequelize){
             type: Sequelize.UUID
         },
         subtotal:{
-            type:Sequelize.DOUBLE(5,5)
+            type:Sequelize.DOUBLE
         },
         iva:{
-            type:Sequelize.DOUBLE(5,5)
+            type:Sequelize.DOUBLE
         },
         descuento: {
-            type: Sequelize.DOUBLE(5,5)
+            type: Sequelize.DOUBLE
         },
         total: {
-            type: Sequelize.DOUBLE(5,5)
+            type: Sequelize.DOUBLE
         }
     }, {freezeTableName: true, timestamps: false});
     

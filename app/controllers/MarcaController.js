@@ -7,11 +7,11 @@ class MarcaController {
         console.log("********");
         Marca.findAll({}).then(function (marcas) {
             console.log(marcas + "Ok...");
-            res.render('layout',
-                    {titulo: "Administracion de Marcas",
-                        fragmento: 'fragmentos/frm_registroMarca',
-                        rol: req.user.rol,
-                        lista: marcas
+            res.render('fragmentos/frm_registroProducto',
+                    {
+                        
+                        //rol: req.user.rol,
+                        listaM: marcas
                         //info: (req.flash('info') != '') ? req.flash('info') : '',
                         //error: (req.flash('error') != '') ? req.flash('error') : ''
                     });
