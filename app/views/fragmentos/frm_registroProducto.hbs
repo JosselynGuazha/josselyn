@@ -1,0 +1,115 @@
+<script src="/javascripts/jquery_validation.js"></script>
+<script>
+    var t = jQuery.noConflict();
+    
+    t().ready(function () {
+       
+        // validate signup form on keyup and submit
+        t("#formulario").validate({
+            rules: {
+                nombre: {
+                    required: true,
+                    minlength: 3                    
+                }, 
+                tipo: {
+                    required: true
+                    
+                },
+                talla: {required: true},
+                color: {required: true},
+                descripcion: {
+                    required: true
+                                       
+                }, 
+                precio: {
+                    required: true,
+                    number: true                    
+                }
+                
+            },
+            messages: {
+                nombre: {
+                    required: "Ingrese el nombre del Producto",
+                    minlength: "Minimo 2 caracteres"
+                }
+            }
+        });        
+    });
+</script>
+<header>
+    <h2>Registro de Producto</h2>
+</header>
+<div class="box">
+    <div class="row">
+        {{ locals.flash }}
+        <div class="card">
+            <div class="card-header">
+
+            </div>
+            <div class="card-body">
+                <form id="formulario" method="POST" action="/josselynStore/administrar/producto/guardar">
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre"  placeholder="Ingrese el nombre">
+                        <small id="marcaHelp" class="form-text text-muted">Nombre del Producto.</small>
+                    </div>
+                   
+                    
+                    <div class="form-group">
+                        <label for="tipo">Tipo</label>
+                        <select name="tipo" id="tipo">
+                            <option value="deportivo">Deportivo</option>
+                            <option value="casual">Casual</option>
+                            <option value="formal">Formal</option>
+                        </select>
+                        <small id="tipoHelp" class="form-text text-muted">Tipo del Producto.</small>
+                    </div>
+                     <div class="form-group">
+                        <label for="talla">Talla</label>
+                        <select name="talla" id="talla">
+                            <option value="S">Small</option>
+                            <option value="M">Medium</option>
+                            <option value="L">Large</option>
+                            <option value="XL">Xtra Large</option>
+                            <option value="2XL">2 Xtra Large</option>
+                        </select>
+                        <small id="tipoHelp" class="form-text text-muted">Tipo del Producto.</small>
+                    </div>
+                     <div class="form-group">
+                        <label for="color">Color</label>
+                        <input type="text" class="form-control" name="color"  placeholder="Ingrese el color">
+                        <small id="color" class="form-text text-muted">Color del Producto.</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="marca">Marca</label>
+                        <select name="marca" id="marca">
+                           
+                            <option>marca</option>
+                           
+                        </select>
+                        <small  class="form-text text-muted">Marca del Producto.</small>
+                    </div>
+                    
+                      <div class="form-group">
+                        <label for="descripcion">Descripcion</label>
+                        <input type="text" class="form-control" name="descripcion"  placeholder="Ingrese descripcion">
+                        <small id="fechHelp" class="form-text text-muted">Color del Producto.</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="precio">Precio</label>
+                        <input type="text" class="form-control" name="precio" aria-describedby="precioHelp" placeholder="Ingrese el precio">
+                        <small id="precioHelp" class="form-text text-muted">Precio del Producto.</small>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <a href="/josselynStore/administrar/vino" class="btn btn-danger">Cancelar</a>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

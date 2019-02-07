@@ -6,6 +6,8 @@ var passport = require('passport');
 var marca = require('../app/controllers/MarcaController');
 var MarcaController = new marca();
 
+var producto= require('../app/controllers/ProductoController');
+var ProductoController = new producto();
 
 router.get('/josselynStore', function(req, res, next) {
   res.render('fragmentos/frm_areacenter', { title: 'Josselyn`s Store' });
@@ -28,6 +30,10 @@ router.get('/josselynStore/administrar/marca', function(req, res, next) {
   res.render('fragmentos/frm_registroMarca', { title: 'Marcas' });
 });
 
+router.get('/josselynStore/administrar/producto', function(req, res, next) {
+  res.render('fragmentos/frm_registroProducto', { title: 'Productos' });
+});
+
 router.post('/iniciar_sesion',
         passport.authenticate('local-signin',
                 {successRedirect: '/josselynStore/inicio',
@@ -40,10 +46,17 @@ router.post('/josselynStore/registro/guardar',
             failureRedirect: '/josselynStore/registro', failureFlash: true}
         ));
 
+
+
  //marcas
 router.get('/josselynStore/administrar/marca', MarcaController.verMarca);
 router.post('/josselynStore/administrar/marca/guardar',MarcaController.guardar);
 router.post('/josselynStore/administrar/marca/modificar',MarcaController.modificar);
+
+//productos
+router.get('/josselynStore/administrar/producto', ProductoController.verProducto);
+router.post('/josselynStore/administrar/producto/guardar',ProductoController.guardar);
+router.post('/josselynStore/administrar/producto/modificar',ProductoController.modificar);
 module.exports = router;
 
 

@@ -9,10 +9,10 @@ module.exports=function(sequelize
         type:Sequelize.INTEGER,
         allowNull:false
     },
-    foto:{
-        type: Sequelize.STRING(50),
-        allowNull:false
-    },
+//    foto:{
+//        type: Sequelize.STRING(50),
+//        allowNull:false
+//    },
     nombre:{
         type: Sequelize.STRING(50),
         allowNull:false
