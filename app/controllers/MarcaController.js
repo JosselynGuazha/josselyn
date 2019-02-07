@@ -6,11 +6,10 @@ class MarcaController {
     verMarca(req, res) {
         console.log("********");
         Marca.findAll({}).then(function (marcas) {
-            console.log(marcas + "Ok...");
-            res.render('layout',
+            //console.log(marcas + "Ok...");
+            res.render('fragmentos/frm_registroMarca',
                     {titulo: "Administracion de Marcas",
-                        fragmento: 'fragmentos/frm_registroMarca',
-                        rol: req.user.rol,
+                        //  rol: req.user.rol,
                         lista: marcas
                         //info: (req.flash('info') != '') ? req.flash('info') : '',
                         //error: (req.flash('error') != '') ? req.flash('error') : ''

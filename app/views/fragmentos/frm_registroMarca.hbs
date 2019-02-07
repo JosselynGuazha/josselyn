@@ -20,78 +20,114 @@
     });
 </script>
 <body class="align-content-center">
-</br>
-</br>
-</br>
+    </br>
+    </br>
+    </br>
 
-<header    data-textAlign="['left','left','left','left','left','center']" >
-    <h2>Registro de Marca</h2>
-</header>
-</br>
+    <header    data-textAlign="['left','left','left','left','left','center']" >
+        <h2>Registro de Marca</h2>
+    </header>
+    </br>
 
-<div class="row">
-    <a href="#"  class="btn btn-success" data-toggle="modal" data-target="#modal">Nuevo</a>
-</div>
+    <div class="row" style="margin-top: 25px; margin-left: 50px; margin-right: 50px;" >
+        <a href="#"  class="btn btn-success" data-toggle="modal" data-target="#modal">Nuevo</a>
+    </div>
 
-<!-- Modal -->
-<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Registrar</h5>
+    <!-- Modal -->
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Registrar</h5>
+
+                </div>
+                <div class="modal-body">
+
+                    <form id="formulario" method="POST" action="/josselynStore/administrar/marca/guardar">
+                        <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" aria-describedby="marcaHelp" placeholder="Ingrese el nombre">
+                            <small id="marcaHelp" class="form-text text-muted">Marca del producto.</small>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                </div>
 
             </div>
-            <div class="modal-body">
-                
-                <form id="formulario" method="POST" action="/josselynStore/administrar/marca/guardar">
-                    <div class="form-group">
-                        <label for="nombre">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" aria-describedby="marcaHelp" placeholder="Ingrese el nombre">
-                        <small id="marcaHelp" class="form-text text-muted">Marca del producto.</small>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Guardar</button>
-                    </div>
-                </form>
-            </div>
-
         </div>
     </div>
-</div>
 
 
-<!-- modals de edicion-->
-<div class="modal fade" id="modal_e" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Modificar</h5>
+    <!-- modals de edicion-->
+    <div class="modal fade" id="modal_e" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modificar</h5>
+
+                </div>
+                <div class="modal-body">
+                    <form id="formulario_e" method="POST" action="/josselynStore/administrar/marca/modificar">
+                        <input type="hidden" name="external" value="0" id="external"/>
+                        <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" class="form-control" id="nombre_e" name="nombre" aria-describedby="marcaHelp" placeholder="Ingrese el nombre">
+                            <small id="marcaHelp" class="form-text text-muted">Marca del producto.</small>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                </div>
 
             </div>
-            <div class="modal-body">
-                <form id="formulario_e" method="POST" action="/josselynStore/administrar/marca/modificar">
-                    <input type="hidden" name="external" value="0" id="external"/>
-                    <div class="form-group">
-                        <label for="nombre">Nombre</label>
-                        <input type="text" class="form-control" id="nombre_e" name="nombre" aria-describedby="marcaHelp" placeholder="Ingrese el nombre">
-                        <small id="marcaHelp" class="form-text text-muted">Marca del producto.</small>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Guardar</button>
-                    </div>
-                </form>
-            </div>
-
         </div>
     </div>
+    <div class="row" style="margin-top: 25px; margin-left: 50px; margin-right: 50px;">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nro</th><th>Nombre</th><th>Estado</th><th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each lista as |marca i|}}
+                <tr>
+                    <th scope="row">{{ i }}</th>
+                    <td>{{ marca.nombre }}</td>
+                    <td> True </td>
+                    <td>
+            <a href="#" id=" {{ i }}" class="btn btn-primary" data-toggle="modal" data-target="#modal_e">Modificar</a>
+            <script>
+                t("{{ i }}").click(function () {
+
+                    t("#nombre_e").val("{{ marcas.nombre }}");
+
+                    t("#external").val("{{ marcas.external_id }}");
+                });
+
+
+
+
+            </script> 
+            </td>
+            </tr>
+            {{/each}}
+            </tbody>
+
+        </table>
+
     </div>
 </body>
 
 
- 
-  
-  
+
+
+
 
 

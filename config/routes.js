@@ -26,10 +26,6 @@ router.get('/josselynStore/registro', function(req, res, next) {
   res.render('registro', { title: 'Josselyn`s ' });
 });
 
-router.get('/josselynStore/administrar/marca', function(req, res, next) {
-  res.render('fragmentos/frm_registroMarca', { title: 'Marcas' });
-});
-
 router.get('/josselynStore/administrar/producto', function(req, res, next) {
   res.render('fragmentos/frm_registroProducto', { title: 'Productos' });
 });
