@@ -1,0 +1,89 @@
+<script src="../javascripts/jquery_validation.js"></script>
+<script>
+    var t = jQuery.noConflict();
+    t().ready(function () {
+        // validate signup form on keyup and submit
+        t("#formulario").validate({
+            rules: {
+                nombre: {
+                    required: true,
+                    minlength: 3
+                }
+            },
+            messages: {
+                nombre: {
+                    required: "Ingrese la marca del producto",
+                    minlength: "Minimo 2 caracteres"
+                }
+            }
+        });
+    });
+</script>
+
+<header>
+    <h2>Registro de Marca</h2>
+</header>
+
+<div class="row">
+    <a href="#"  class="btn btn-success" data-toggle="modal" data-target="#modal">Nuevo</a>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Registrar</h5>
+
+            </div>
+            <div class="modal-body">
+                
+                <form id="formulario" method="POST" action="/josselynStore/administrar/marca/guardar">
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" aria-describedby="marcaHelp" placeholder="Ingrese el nombre">
+                        <small id="marcaHelp" class="form-text text-muted">Marca del producto.</small>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- modals de edicion-->
+<div class="modal fade" id="modal_e" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modificar</h5>
+
+            </div>
+            <div class="modal-body">
+                <form id="formulario_e" method="POST" action="/josselynStore/administrar/marca/modificar">
+                    <input type="hidden" name="external" value="0" id="external"/>
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" class="form-control" id="nombre_e" name="nombre" aria-describedby="marcaHelp" placeholder="Ingrese el nombre">
+                        <small id="marcaHelp" class="form-text text-muted">Marca del producto.</small>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+  
+  
+
+

@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 /* GET home page. */
+//controladores
+var marca = require('../app/controllers/MarcaController');
+var MarcaController = new marca();
 
 
 router.get('/josselynStore', function(req, res, next) {
@@ -21,6 +24,10 @@ router.get('/josselynStore/registro', function(req, res, next) {
   res.render('registro', { title: 'Josselyn`s ' });
 });
 
+router.get('/josselynStore/administrar/marca', function(req, res, next) {
+  res.render('fragmentos/frm_registroMarca', { title: 'Marcas' });
+});
+
 router.post('/iniciar_sesion',
         passport.authenticate('local-signin',
                 {successRedirect: '/josselynStore/inicio',
@@ -32,6 +39,11 @@ router.post('/josselynStore/registro/guardar',
         passport.authenticate('local-signup', {successRedirect: '/josselynStore/login',
             failureRedirect: '/josselynStore/registro', failureFlash: true}
         ));
+
+ //marcas
+router.get('/josselynStore/administrar/marca', MarcaController.verMarca);
+router.post('/josselynStore/administrar/marca/guardar',MarcaController.guardar);
+router.post('/josselynStore/administrar/marca/modificar',MarcaController.modificar);
 module.exports = router;
 
 

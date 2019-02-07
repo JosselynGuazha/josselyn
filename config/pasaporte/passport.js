@@ -137,7 +137,7 @@ module.exports = function (passport, cuenta, persona, rol) {
                 }
                 Cuenta.findOne({where: {correo: email}}).then(function (cuenta) {
                     if (!cuenta) {
-                        console.log('Cuneta no existe');
+                        console.log('Cuenta no existe');
                         return done(null, false, {message: req.flash('err_cred', 'Cuenta no existe')});
                     }
 

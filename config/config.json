@@ -1,14 +1,14 @@
 {
     "development":{
         "username": "root",
-        "password": "1150700159jo",
+        "password": "root",
         "database": "tienda",
         "host": "localhost",
         "dialect": "mysql"
     },
     "stating":{
          "username": "root",
-        "password": "1150700159jo",
+        "password": "root",
         "database": "tienda",
         "host": "localhost",
         "dialect": "mysql"
