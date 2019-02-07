@@ -8,11 +8,12 @@ module.exports=function(sequelize, Sequelize){
         
     },
     nombre:{
-        type: Sequelize.STRING(20)
+        type: Sequelize.STRING(50)
     },
     external_id:{
         type: Sequelize.UUID
     }
+    
 }, {timestamps:false,
     freezeTableName:true});
 

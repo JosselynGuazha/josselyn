@@ -53,7 +53,7 @@
                     <div class="form-group">
                         <label for="nombre">Nombre</label>
                         <input type="text" class="form-control" id="nombre" name="nombre"  placeholder="Ingrese el nombre">
-                        <small id="marcaHelp" class="form-text text-muted">Nombre del Producto.</small>
+                        <small id="nombreHelp" class="form-text text-muted">Nombre del Producto.</small>
                     </div>
                    
                     
@@ -75,28 +75,28 @@
                             <option value="XL">Xtra Large</option>
                             <option value="2XL">2 Xtra Large</option>
                         </select>
-                        <small id="tipoHelp" class="form-text text-muted">Tipo del Producto.</small>
+                        <small id="tallaHelp" class="form-text text-muted">Tipo del Producto.</small>
                     </div>
                      <div class="form-group">
                         <label for="color">Color</label>
                         <input type="text" class="form-control" name="color"  placeholder="Ingrese el color">
-                        <small id="color" class="form-text text-muted">Color del Producto.</small>
+                        <small id="colorHelp" class="form-text text-muted">Color del Producto.</small>
                     </div>
                     
                     <div class="form-group">
                         <label for="marca">Marca</label>
                         <select name="marca" id="marca">
-                           
-                            <option>marca</option>
-                           
+                            {{#each listaM }}
+                            <option value="{{id}}">{{nombre}}</option>
+                            {{/each}}
                         </select>
-                        <small  class="form-text text-muted">Marca del Producto.</small>
+                        <small id="marcaHelp" class="form-text text-muted">Marca del Producto.</small>
                     </div>
                     
                       <div class="form-group">
                         <label for="descripcion">Descripcion</label>
                         <input type="text" class="form-control" name="descripcion"  placeholder="Ingrese descripcion">
-                        <small id="fechHelp" class="form-text text-muted">Color del Producto.</small>
+                        <small id="fechHelp" class="form-text text-muted">Descripcion del Producto.</small>
                     </div>
                     
                     <div class="form-group">

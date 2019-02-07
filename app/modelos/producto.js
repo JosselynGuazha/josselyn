@@ -8,11 +8,9 @@ module.exports=function(sequelize
         primaryKey:true,
         type:Sequelize.INTEGER,
         allowNull:false
+      
     },
-//    foto:{
-//        type: Sequelize.STRING(50),
-//        allowNull:false
-//    },
+
     nombre:{
         type: Sequelize.STRING(50),
         allowNull:false
@@ -22,7 +20,7 @@ module.exports=function(sequelize
         type: Sequelize.STRING(50)
     },
     talla:{
-        type: Sequelize.STRING(10)
+        type: Sequelize.STRING
     },
     
     color:{
@@ -33,7 +31,7 @@ module.exports=function(sequelize
         allowNull:false
     },
     precio:{
-        type: Sequelize.DOUBLE(5,5),
+        type: Sequelize.DOUBLE,
         allowNull:false
     }
   
