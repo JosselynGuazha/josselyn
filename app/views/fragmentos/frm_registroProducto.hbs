@@ -115,3 +115,52 @@
     </div>
 </div>
 
+ <div class="row" style="margin-top: 25px; margin-left: 50px; margin-right: 50px;">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nro</th><th>Foto</th><th>Nombre</th><th>Color</th><th>Talla</th><th>Precio</th><th>Estado</th><th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each lista as |producto i|}}
+                <tr>
+                    <th scope="row">{{ i }}</th>
+                    <td>
+                        <img class="rounded" src="/img/{{ producto.foto }}" width="100"/> 
+                        <form action="/josselynStore/administrar/producto/guardar_foto/{{ producto.external_id }}" method="POST">
+                            <input class="custom-file-input" type="file" accept="image/image/jpeg/jpg/png" id="foto" name="foto"/>
+                            <div class="modal-footer">
+                                <a href="/josselynStore/administrar/producto" class="btn btn-danger">Cancelar</a>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+                        </form>
+                    </td>
+                    <td>{{ producto.nombre }}</td>
+                    <td>{{ producto.color }}</td>
+                    <td>{{ producto.talla }}</td>
+                    <td>{{ producto.precio }}</td>
+                    <td> True </td>
+                    <td>
+            <a href="#" id=" {{ i }}" class="btn btn-primary" data-toggle="modal" data-target="#modal_e">Modificar</a>
+            <script>
+                t("{{ i }}").click(function () {
+
+                    t("#nombre_e").val("{{ marcas.nombre }}");
+
+                    t("#external").val("{{ marcas.external_id }}");
+                });
+
+
+
+
+            </script> 
+            </td>
+            </tr>
+            {{/each}}
+            </tbody>
+
+        </table>
+
+    </div>

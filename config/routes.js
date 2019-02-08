@@ -9,6 +9,15 @@ var MarcaController = new marca();
 var producto= require('../app/controllers/ProductoController');
 var ProductoController = new producto();
 
+var auth = function middleWare(req, res, next) {
+    if (req.isAuthenticated()) {
+        next();
+    } else {
+        req.flash('err_cred', 'Inicia sesion!!!');
+        res.redirect('/josselynStore/login');
+    }
+};
+
 router.get('/josselynStore', function(req, res, next) {
   res.render('fragmentos/frm_areacenter', { title: 'Josselyn`s Store' });
 });
@@ -26,17 +35,6 @@ router.get('/josselynStore/registro', function(req, res, next) {
   res.render('registro', { title: 'Josselyn`s ' });
 });
 
-<<<<<<< HEAD
-router.get('/josselynStore/administrar/producto', function(req, res, next) {
-  res.render('fragmentos/frm_registroProducto', { title: 'Productos' });
-});
-=======
-router.get('/josselynStore/administrar/marca', function(req, res, next) {
-  res.render('fragmentos/frm_registroMarca', { title: 'Marcas' });
-});
-
-
->>>>>>> 634fe21bd66c94cb52c7fe42316949fa046b44da
 
 router.post('/iniciar_sesion',
         passport.authenticate('local-signin',
@@ -58,9 +56,12 @@ router.post('/josselynStore/administrar/marca/guardar',MarcaController.guardar);
 router.post('/josselynStore/administrar/marca/modificar',MarcaController.modificar);
 
 //productos
-router.get('/josselynStore/administrar/producto', ProductoController.verProducto);
+router.get('/josselynStore/administrar/producto', auth, ProductoController.verProducto);
 router.post('/josselynStore/administrar/producto/guardar',ProductoController.guardar);
 router.post('/josselynStore/administrar/producto/modificar',ProductoController.modificar);
+
+router.post('/josselynStore/administrar/producto/guardar_foto/:external', auth, ProductoController.guardarImagen);
+
 module.exports = router;
 
 

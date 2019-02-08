@@ -15,7 +15,7 @@ class ProductoController {
                     {titulo: "Administracion de Productos",
                        
                         //rol: req.user.rol,
-                        //lista: productos,
+                        lista: productos,
                         listaM: marcas
                         //info: (req.flash('info') != '') ? req.flash('info') : '',
                         //error: (req.flash('error') != '') ? req.flash('error') : ''
@@ -40,7 +40,7 @@ class ProductoController {
             res.render('layout',
                     {titulo: "Administracion de Productos",
                         fragmento: 'fragmentos/frm_registroProducto',
-                        rol: req.user.rol,
+                       // rol: req.user.rol,
                         marcas: marcas
                         //info: (req.flash('info') != '') ? req.flash('info') : '',
                         //error: (req.flash('error') != '') ? req.flash('error') : ''
@@ -58,6 +58,7 @@ class ProductoController {
         Producto.create({
             external_id: uuidv4(),
             nombre: req.body.nombre,
+            foto: 'logo.png',
             //fecha_creacion: req.body.fecha,
             tipo: req.body.tipo,
             talla: req.body.talla,
@@ -108,6 +109,7 @@ class ProductoController {
             external_id: uuidv4(),
             nombre: req.body.nombre,
             //fecha_creacion: req.body.fecha,
+            
             tipo: req.body.tipo,
             talla: req.body.talla,
             cantidad:req.body.cantidad,
@@ -119,6 +121,22 @@ class ProductoController {
             if (updatedProducto) {
                 req.flash('info', 'Se ha creado correctamente', false);
                 res.redirect('/josselynStore/administrar/producto');
+            }
+        });
+    }
+    
+    guardarImagen(req, res) {
+console.log(req.params.external);
+        Producto.update({
+            foto: req.body.foto
+        }, {where: {external_id: req.params.external}}).then(function (updateProducto, created) {
+            if (updateProducto) {
+                console.log("Se ha subido correctamente");
+                req.flash('info', 'Se ha subido correctamente', false);
+                res.redirect('/josselynStore/administrar/producto');
+            } else
+            {
+                console.log("Hola soy---");
             }
         });
     }
