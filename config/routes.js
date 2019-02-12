@@ -31,9 +31,6 @@ router.get('/josselynStore/login', function(req, res, next) {
   res.render('fragmentos/login', { title: 'Josselyn`s Store' , error: req.flash('err_cred')});
 });
 
-router.get('/josselynStore/registro', function(req, res, next) {
-  res.render('registro', { title: 'Josselyn`s ' });
-});
 
 
 router.post('/iniciar_sesion',
