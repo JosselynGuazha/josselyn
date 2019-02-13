@@ -21,9 +21,11 @@ var auth = function middleWare(req, res, next) {
 router.get('/josselynStore', function(req, res, next) {
   res.render('fragmentos/frm_areacenter', { title: 'Josselyn`s Store' });
 });
-router.get('/josselynStore/inicio', function(req, res, next) {
-  res.render('fragmentos/frm_inicio', { title: 'Josselyn`s Store', rol : req.user.nombre });
-});
+
+router.get('/josselynStore/inicio', ProductoController.verInicio);
+
+
+
 router.get('/josselynStore/registro', function(req, res, next) {
   res.render('fragmentos/registro', { title: 'Josselyn`s Store' });
 });
@@ -48,16 +50,16 @@ router.post('/josselynStore/registro/guardar',
 
 
  //marcas
-router.get('/josselynStore/administrar/marca', MarcaController.verMarca);
-router.post('/josselynStore/administrar/marca/guardar',MarcaController.guardar);
-router.post('/josselynStore/administrar/marca/modificar',MarcaController.modificar);
+router.get('/josselynStore/administrar/marca',auth, MarcaController.verMarca);
+router.post('/josselynStore/administrar/marca/guardar',auth,MarcaController.guardar);
+router.post('/josselynStore/administrar/marca/modificar',auth,MarcaController.modificar);
 
 //productos
 router.get('/josselynStore/administrar/producto', auth, ProductoController.verProducto);
-router.post('/josselynStore/administrar/producto/guardar',ProductoController.guardar);
-router.post('/josselynStore/administrar/producto/modificar',ProductoController.modificar);
+router.post('/josselynStore/administrar/producto/guardar',auth,ProductoController.guardar);
+router.post('/josselynStore/administrar/producto/modificar',auth,ProductoController.modificar);
 
-router.post('/josselynStore/administrar/producto/guardar_foto/:external', auth, ProductoController.guardarImagen);
+//.post('/josselynStore/administrar/producto/guardar_foto/:external', auth, ProductoController.guardarImagen);
 
 module.exports = router;
 

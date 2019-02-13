@@ -1,4 +1,5 @@
-<script src="../javascripts/jquery_validation.js"></script>
+
+
 <script>
     var t = jQuery.noConflict();
     t().ready(function () {
@@ -19,6 +20,7 @@
         });
     });
 </script>
+
 <body class="align-content-center">
     </br>
     </br>
@@ -74,7 +76,7 @@
                         <input type="hidden" name="external" value="0" id="external"/>
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
-                            <input type="text" class="form-control" id="nombre_e" name="nombre" aria-describedby="marcaHelp" placeholder="Ingrese el nombre">
+                            <input type="text" class="form-control" id="nombre_e" name="nombre" aria-describedby="marcaHelp" placeholder="Ingrese el nombre" value="">
                             <small id="marcaHelp" class="form-text text-muted">Marca del producto.</small>
                         </div>
                         <div class="modal-footer">
@@ -99,23 +101,17 @@
                 {{#each lista as |marca i|}}
                 <tr>
                     <th scope="row">{{ i }}</th>
-                    <td>{{ marca.nombre }}</td>
+                    <td> {{ marca.nombre }} </td> 
                     <td> True </td>
                     <td>
-            <a href="#" id=" {{ i }}" class="btn btn-primary" data-toggle="modal" data-target="#modal_e">Modificar</a>
+                        <a href="" id="{{ i }}" class="btn btn-primary"  data-toggle="modal"  data-target="#modal_e">Modificar</a>
+                    </td>
             <script>
-                t("{{ i }}").click(function () {
-
-                    t("#nombre_e").val("{{ marcas.nombre }}");
-
-                    t("#external").val("{{ marcas.external_id }}");
+                t("#{{ i }}").click(function () {
+                    t("#external").val("{{ marca.external_id }}");
+                    t("#nombre_e").val("{{ marca.nombre }}");
                 });
-
-
-
-
             </script> 
-            </td>
             </tr>
             {{/each}}
             </tbody>

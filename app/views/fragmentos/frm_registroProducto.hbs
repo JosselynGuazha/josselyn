@@ -1,31 +1,31 @@
-<script src="/javascripts/jquery_validation.js"></script>
+
 <script>
     var t = jQuery.noConflict();
-    
+
     t().ready(function () {
-       
+
         // validate signup form on keyup and submit
         t("#formulario").validate({
             rules: {
                 nombre: {
                     required: true,
-                    minlength: 3                    
-                }, 
+                    minlength: 3
+                },
                 tipo: {
                     required: true
-                    
+
                 },
                 talla: {required: true},
                 color: {required: true},
                 descripcion: {
                     required: true
-                                       
-                }, 
+
+                },
                 precio: {
                     required: true,
-                    number: true                    
+                    number: true
                 }
-                
+
             },
             messages: {
                 nombre: {
@@ -33,7 +33,7 @@
                     minlength: "Minimo 2 caracteres"
                 }
             }
-        });        
+        });
     });
 </script>
 <header style=" top:25px; margin-left: 50px; margin-right: 50px;">
@@ -41,6 +41,8 @@
     <h2>Registro de Producto</h2>
     <br>
 </header>
+<!-- modal-->
+
 <div class="box">
     <div class="row">
         {{ locals.flash }}
@@ -55,8 +57,8 @@
                         <input type="text" class="form-control" id="nombre" name="nombre"  placeholder="Ingrese el nombre">
                         <small id="nombreHelp" class="form-text text-muted">Nombre del Producto.</small>
                     </div>
-                   
-                    
+
+
                     <div class="form-group">
                         <label for="tipo">Tipo</label>
                         <select name="tipo" id="tipo">
@@ -66,7 +68,7 @@
                         </select>
                         <small id="tipoHelp" class="form-text text-muted">Tipo del Producto.</small>
                     </div>
-                     <div class="form-group">
+                    <div class="form-group">
                         <label for="talla">Talla</label>
                         <select name="talla" id="talla">
                             <option value="S">Small</option>
@@ -77,12 +79,12 @@
                         </select>
                         <small id="tallaHelp" class="form-text text-muted">Tipo del Producto.</small>
                     </div>
-                     <div class="form-group">
+                    <div class="form-group">
                         <label for="color">Color</label>
-                        <input type="text" class="form-control" name="color"  placeholder="Ingrese el color">
+                        <input type="text" class="form-control" name="color" id="color"  placeholder="Ingrese el color">
                         <small id="colorHelp" class="form-text text-muted">Color del Producto.</small>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="marca">Marca</label>
                         <select name="marca" id="marca">
@@ -92,19 +94,23 @@
                         </select>
                         <small id="marcaHelp" class="form-text text-muted">Marca del Producto.</small>
                     </div>
-                    
-                      <div class="form-group">
+
+                    <div class="form-group">
                         <label for="descripcion">Descripcion</label>
                         <input type="text" class="form-control" name="descripcion"  placeholder="Ingrese descripcion">
                         <small id="fechHelp" class="form-text text-muted">Descripcion del Producto.</small>
                     </div>
-                    
+                    <div class="form-group">
+                        <label for="cantidad">Cantidad</label>
+                        <input type="text" class="form-control" name="cantidad" id="cantidad" aria-describedby="cantidadHelp" placeholder="Ingrese la Cantidad del producto">
+                        <small id="cantidadHelp" class="form-text text-muted">Cantidad.</small>
+                    </div>
                     <div class="form-group">
                         <label for="precio">Precio</label>
                         <input type="text" class="form-control" name="precio" aria-describedby="precioHelp" placeholder="Ingrese el precio">
                         <small id="precioHelp" class="form-text text-muted">Precio del Producto.</small>
                     </div>
-                    
+
                     <div class="modal-footer">
                         <a href="/josselynStore/administrar/vino" class="btn btn-danger">Cancelar</a>
                         <button type="submit" class="btn btn-primary">Guardar</button>
@@ -115,52 +121,140 @@
     </div>
 </div>
 
- <div class="row" style="margin-top: 25px; margin-left: 50px; margin-right: 50px;">
+<!-- modals de edicion-->
+<div class="modal fade" id="modal_e" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="box" >
+        <div class="row">
+            {{ locals.flash }}
+            <div class="card" style="margin-left: 550px; margin-right: 350px;">
+                <div class="card-header">
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Nro</th><th>Foto</th><th>Nombre</th><th>Color</th><th>Talla</th><th>Precio</th><th>Estado</th><th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{#each lista as |producto i|}}
-                <tr>
-                    <th scope="row">{{ i }}</th>
-                    <td>
-                        <img class="rounded" src="/img/{{ producto.foto }}" width="100"/> 
-                        <form action="/josselynStore/administrar/producto/guardar_foto/{{ producto.external_id }}" method="POST">
-                            <input class="custom-file-input" type="file" accept="image/image/jpeg/jpg/png" id="foto" name="foto"/>
-                            <div class="modal-footer">
-                                <a href="/josselynStore/administrar/producto" class="btn btn-danger">Cancelar</a>
-                                <button type="submit" class="btn btn-primary">Guardar</button>
-                            </div>
-                        </form>
-                    </td>
-                    <td>{{ producto.nombre }}</td>
-                    <td>{{ producto.color }}</td>
-                    <td>{{ producto.talla }}</td>
-                    <td>{{ producto.precio }}</td>
-                    <td> True </td>
-                    <td>
-            <a href="#" id=" {{ i }}" class="btn btn-primary" data-toggle="modal" data-target="#modal_e">Modificar</a>
-            <script>
-                t("{{ i }}").click(function () {
-
-                    t("#nombre_e").val("{{ marcas.nombre }}");
-
-                    t("#external").val("{{ marcas.external_id }}");
-                });
+                </div>
+                <div class="card-body">
+                    <form id="formulario_e" method="POST" action="/josselynStore/administrar/producto/modificar">
+                        <input type="hidden" name="external" value="0" id="external"/>
+                        <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" class="form-control" id="nombre_e" name="nombre"  placeholder="Ingrese el nombre">
+                            <small id="nombreHelp" class="form-text text-muted">Nombre del Producto.</small>
+                        </div>
 
 
+                        <div class="form-group">
+                            <label for="tipo">Tipo</label>
+                            <select name="tipo" id="tipo_e">
+                                <option value="deportivo">Deportivo</option>
+                                <option value="casual">Casual</option>
+                                <option value="formal">Formal</option>
+                            </select>
+                            <small id="tipoHelp" class="form-text text-muted">Tipo del Producto.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="talla">Talla</label>
+                            <select name="talla" id="talla_e">
+                                <option value="S">Small</option>
+                                <option value="M">Medium</option>
+                                <option value="L">Large</option>
+                                <option value="XL">Xtra Large</option>
+                                <option value="2XL">2 Xtra Large</option>
+                            </select>
+                            <small id="tallaHelp" class="form-text text-muted">Tipo del Producto.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="color">Color</label>
+                            <input type="text" class="form-control" name="color" id="color_e" placeholder="Ingrese el color">
+                            <small id="colorHelp" class="form-text text-muted">Color del Producto.</small>
+                        </div>
 
+                        <div class="form-group">
+                            <label for="marca">Marca</label>
+                            <select name="marca" id="marca_e">
+                                {{#each listaM }}
+                                <option value="{{id}}">{{nombre}}</option>
+                                {{/each}}
+                            </select>
+                            <small id="marcaHelp" class="form-text text-muted">Marca del Producto.</small>
+                        </div>
 
-            </script> 
-            </td>
+                        <div class="form-group">
+                            <label for="descripcion">Descripcion</label>
+                            <input type="text" class="form-control" name="descripcion" id="descripcion_e"  placeholder="Ingrese descripcion">
+                            <small id="fechHelp" class="form-text text-muted">Descripcion del Producto.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="cantidad">Cantidad</label>
+                            <input type="text" class="form-control" name="cantidad" id="cantidad_e" aria-describedby="cantidadHelp" placeholder="Ingrese la Cantidad del producto">
+                            <small id="cantidadHelp" class="form-text text-muted">Cantidad.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="precio">Precio</label>
+                            <input type="text" class="form-control" name="precio" id="precio_e" aria-describedby="precioHelp" placeholder="Ingrese el precio">
+                            <small id="precioHelp" class="form-text text-muted">Precio del Producto.</small>
+                        </div>
+
+                        <div class="modal-footer">
+                            <a href="/josselynStore/administrar/producto" class="btn btn-danger">Cancelar</a>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" style="margin-top: 25px; margin-left: 50px; margin-right: 50px;">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nro</th><th>Foto</th><th>Nombre</th><th>Color</th><th>Talla</th><th>Precio</th><th>Estado</th><th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each lista as |producto i|}}
+            <tr>
+                <th scope="row">{{ i }}</th>
+                <td>
+                    <img class="rounded" src="/img/{{ producto.foto }}" width="100"/> 
+                    <form action="/josselynStore/administrar/producto/guardar_foto/{{ producto.external_id }}" method="POST">
+                        <input class="custom-file-input" type="file" accept="image/image/jpeg/jpg/png" id="foto" name="foto"/>
+                        <div class="modal-footer">
+                            <a href="/josselynStore/administrar/producto" class="btn btn-danger">Cancelar</a>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                </td>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.color }}</td>
+                <td>{{ producto.talla }}</td>
+                <td>{{ producto.precio }}</td>
+                <td> True </td>
+                <td>
+                    <a href="#" id="{{ i }}" class="btn btn-primary" data-toggle="modal" data-target="#modal_e">Modificar</a>
+                  
+                </td>
+                  <script>
+                       
+                          t("#{{ i }}").click(function () {
+                             console.log("holi....");
+                            t("#external").val("{{ producto.external_id }}");
+                            t("#nombre_e").val("{{ producto.nombre }}");
+                            t("#tipo_e").val("{{ producto.tipo }}");
+                            t("#talla_e").val("{{ producto.talla }}");
+                            t("#color_e").val("{{ producto.color }}");
+                            t("#descripcion_e").val("{{ producto.descripcion }}");
+                            t("#cantidad_e").val("{{ producto.cantidad }}");
+                            t("#precio_e").val("{{ producto.precio }}");
+
+                        });  
+         
+                       
+                    </script> 
             </tr>
             {{/each}}
-            </tbody>
+        </tbody>
 
-        </table>
+    </table>
 
-    </div>
+</div>

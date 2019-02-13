@@ -10,7 +10,7 @@ class MarcaController {
             //console.log(marcas + "Ok...");
             res.render('fragmentos/frm_registroMarca',
                     {titulo: "Administracion de Marcas",
-                        //  rol: req.user.rol,
+                       //rol: req.user.rol,
                         lista: marcas
                         //info: (req.flash('info') != '') ? req.flash('info') : '',
                         //error: (req.flash('error') != '') ? req.flash('error') : ''

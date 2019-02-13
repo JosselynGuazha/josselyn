@@ -24,6 +24,9 @@ module.exports = function (sequelize
         talla: {
             type: Sequelize.STRING
         },
+        cantidad: {
+            type: Sequelize.INTEGER
+        },
 
         color: {
             type: Sequelize.STRING
