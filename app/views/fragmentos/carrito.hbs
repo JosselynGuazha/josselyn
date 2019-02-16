@@ -1,0 +1,99 @@
+<header style="margin-left: 550px; margin-right: 350px;">
+    <h2>{{ titulo }}</h2>
+</header>
+<script>
+    function crearTabla(data) {
+        var html = "";
+        var subtotal = 0;
+        var iva = 0;
+        var total = 0;
+        $.each(data, function (i, item) {
+            html += '<tr>';
+            html += '<td>' + (i + 1) + '</td>';
+            html += '<td><a href="#tabla" onClick="return item(' + "'" + item.external + "'" + ', 0)" id="a_' + i + '" class="btn btn-success">+</a> ' + (item.cant) + ' <a href="#tabla" onClick="return item(' + "'" + item.external + "'" + ', 1)" id="q_' + i + '" class="btn btn-danger">-</a>';
+            html += '</td>';
+            html += '<td>' + item.marca + " " + item.nombre + '</td>';
+            html += '<td>' + item.pu + '</td>';
+            html += '<td>' + item.pt + '</td>';
+            html += '</tr>';
+            subtotal += item.pt;
+        });
+        subtotal = subtotal.toFixed(2);
+        total = subtotal * 1.12;
+        iva = total - subtotal;
+        iva = iva.toFixed(2);
+        total = total.toFixed(2);
+        html += '<tr><td style="text-align: right" colspan="4">SUBTOTAL: </td>';
+        html += '<td><input name="subtotal" value="' + subtotal + '" readonly/></td></tr>';
+        html += '<tr><td style="text-align: right" colspan="4">IVA: </td>';
+        html += '<td><input name="iva" value="' + iva + '" readonly/></td></tr>';
+        html += '<tr><td style="text-align: right" colspan="4">TOTAL: </td>';
+        html += '<td><input name="total" value="' + total + '" readonly/></td></tr>';
+
+        $("#tabla tbody").html(html);
+    }
+    function item(external, tipo) {
+        var url = 'http://localhost:3000/josselynStore/compra/carrito/agregar/' + external;
+        url = (tipo == 1) ? 'http://localhost:3000/josselynStore/compra/carrito/quitar/' + external : url;
+        $.ajax({
+            url: url,
+            type: 'GET',
+            dataType: 'json',
+            success: function (data, textStatus, jqXHR) {
+                crearTabla(data);
+                mostrarNroItems(data);
+                if (data.length <= 0) {
+                    $("#comprar").hide();
+                }
+            }, error: function (jqXHR, textStatus, errorThrown) {
+
+            }
+        });
+    }
+    function cargarCarro() {
+        var url = 'http://localhost:3000/josselynStore/compra/carrito/obtener';
+        $.ajax({
+            url: url,
+            type: 'GET',
+            dataType: 'json',
+            success: function (data, textStatus, jqXHR) {
+                crearTabla(data);
+                if (data.length <= 0) {
+                    $("#comprar").hide();
+                }
+            }, error: function (jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR.responseText);
+            }
+        });
+    }
+    $(document).ready(function () {
+        cargarCarro();
+    });
+</script>
+<div class="box">
+
+    <div class="row">
+        {{#if mensaje}}
+        <div class="alert alert-warning">{{error}}</div>
+        {{/if}}
+        
+        <form method="POST" action="/josselynStore/venta/guardar" style="margin-left: 550px; margin-right: 350px;">
+            <table id="tabla">
+                <thead>
+                    <tr>
+                        <th>Nro   </th>   
+                        <th>Cant</th>  
+                        <th>Descripcion</th>        
+                        <th>PU</th> 
+                        <th>PT</th>
+                    </tr>
+                </thead>
+                 <tbody>
+                </tbody>
+            </table>      
+            <button type="submit" id="comprar"><a href="/josselynStore/envio/direccion">Comprar</a></button>
+        </form>
+    </div>
+</div>
+
+

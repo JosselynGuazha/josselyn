@@ -9,6 +9,15 @@ var MarcaController = new marca();
 var producto= require('../app/controllers/ProductoController');
 var ProductoController = new producto();
 
+var carro = require('../app/controllers/CarritoController');
+var carritoController = new carro();
+
+var venta = require('../app/controllers/VentaController');
+var ventaController = new venta();
+
+var direccion = require('../app/controllers/DireccionController');
+var direccionController = new direccion();
+
 var auth = function middleWare(req, res, next) {
     if (req.isAuthenticated()) {
         next();
@@ -19,10 +28,19 @@ var auth = function middleWare(req, res, next) {
 };
 
 router.get('/josselynStore', function(req, res, next) {
-  res.render('fragmentos/frm_areacenter', { title: 'Josselyn`s Store' });
+    if(req.isAuthenticated()){
+        res.redirect('/josselynStore/inicio');
+    }else{
+        res.render('fragmentos/frm_areacenter', { title: 'Josselyn`s Store', login: req.isAuthenticated()});
+    }
+  
+});
+router.get('/josselynStore/cerrar_session', function(req, res, next){
+    req.session.destroy();
+    res.redirect('/josselynStore');
 });
 
-router.get('/josselynStore/inicio', ProductoController.verInicio);
+router.get('/josselynStore/inicio', auth, ProductoController.verInicio);
 
 
 
@@ -30,7 +48,11 @@ router.get('/josselynStore/registro', function(req, res, next) {
   res.render('fragmentos/registro', { title: 'Josselyn`s Store' });
 });
 router.get('/josselynStore/login', function(req, res, next) {
-  res.render('fragmentos/login', { title: 'Josselyn`s Store' , error: req.flash('err_cred')});
+    if(req.isAuthenticated()){
+        res.redirect('/josselynStore/inicio');
+    }else{
+     res.render('fragmentos/login', { title: 'Josselyn`s Store' , error: req.flash('err_cred')});   
+    }
 });
 
 
@@ -59,7 +81,27 @@ router.get('/josselynStore/administrar/producto', auth, ProductoController.verPr
 router.post('/josselynStore/administrar/producto/guardar',auth,ProductoController.guardar);
 router.post('/josselynStore/administrar/producto/modificar',auth,ProductoController.modificar);
 
-//.post('/josselynStore/administrar/producto/guardar_foto/:external', auth, ProductoController.guardarImagen);
+//router.post('/josselynStore/administrar/producto/guardar_foto/:external', auth, ProductoController.guardarImagen);
+router.post('/josselynStore/administrar/producto/guardar_foto', auth, ProductoController.guardarImagen);
+
+//carrito
+router.get('/josselynStore/compra/carrito/obtener', auth,  carritoController.mostrarCarrito);
+router.get('/josselynStore/compra/carrito/quitar/:external', auth,  carritoController.quitar_item);
+router.get('/josselynStore/compra/carrito/agregar/:external', auth,  carritoController.agregar_item);
+router.get('/josselynStore/compra/carrito/:external', auth,  carritoController.cargarCarro);
+
+//venta
+router.get('/josselynStore/venta', auth,  ventaController.mostrarCarritoFinalizado);
+router.post('/josselynStore/venta/guardar', auth,  ventaController.guardar);
+
+//envio
+router.get('/josselynStore/envio/direccion', auth,  direccionController.verDireccion);
+router.post('/josselynStore/envio/direccion/guardar', auth,  direccionController.guardar);
+router.post('/josselynStore/envio/direccion/modificar', auth,  direccionController.modificar);
+
+//pago
+router.get('/josselynStore/pago', auth,  direccionController.pago);
+
 
 module.exports = router;
 

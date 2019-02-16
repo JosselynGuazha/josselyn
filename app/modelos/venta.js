@@ -10,9 +10,7 @@ module.exports = function (sequelize, Sequelize){
             primaryKey: true,
             type: Sequelize.INTEGER  
         },
-        fotos:{
-            type:Sequelize.STRING 
-        },
+       
         external_id: {
             type: Sequelize.UUID
         },
@@ -32,14 +30,17 @@ module.exports = function (sequelize, Sequelize){
     
    Venta.belongsTo(Persona, {
         foreignKey: 'id_persona',
-        constraints: true
+        constraints: false
 
     });
     Venta.belongsTo(Transaccion, {
         foreignKey: 'id_transaccion',
-        constraints: true
-
+        constraints: false
     });
+    Venta.associate= function (models){
+        models.venta.hasMany(models.detalleProducto, {
+            foreignKey:'id_venta'});
+    };
     return Venta;
 };
 

@@ -1,4 +1,19 @@
-
+<script>
+    
+    function agregarCarrito(external) {
+        var url = 'http://localhost:3000/josselynStore/compra/carrito/' + external;
+        $.ajax({
+            url: url,
+            type: 'GET',
+            dataType: 'json',
+            success: function (data, textStatus, jqXHR) {
+                refrescar();
+            }, error: function (jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR);
+            }
+        });
+    }
+</script>
 <div>
     <h1>Bienvenido {{rol}}</h1>
 </div>
@@ -132,7 +147,7 @@
         <div class="s_m_title">
             <h2>Nuestros ultimos Productos</h2>
         </div>
-        <div class="l_product_slider owl-carousel">
+        <div>
             {{#each lista as |producto i|}}
             <div class="item">
                 <div class="l_product_item">
@@ -142,8 +157,14 @@
                     <div class="l_p_text">
                         <ul>
                             <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                            <li><a class="add_cart_btn" href="#">Añadir Al carrito</a></li>
+                            <li><a id="{{i}}_a" class="add_cart_btn" href="#">Añadir Al carrito</a></li>
+                              <script>
+                            $("#{{i}}_a").click(function () {
+                                agregarCarrito("{{producto.external_id}}");
+                            });
+                        </script>
                             <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
+                            
                         </ul>
                         <h4>{{ producto.nombre }}</h4>
                         <h5><del>$45.50</del>  $40</h5>

@@ -2,6 +2,10 @@ module.exports=function(sequelize
 , Sequelize){
     var producto=require('../modelos/producto');
     var Producto = new producto(sequelize,Sequelize);
+    
+    var venta=require('../modelos/venta');
+    var Venta = new venta(sequelize,Sequelize);
+    
     var DetalleProducto= sequelize.define('detalleProducto',{
     id:{
         autoIncrement:true,
@@ -13,11 +17,11 @@ module.exports=function(sequelize
         type: Sequelize.INTEGER,
         allowNull:false
     },
-    precioUnitario:{
+    precio_unitario:{
         type: Sequelize.DOUBLE,
         allowNull:false
     },
-   precioTotal:{
+   precio_total:{
         type: Sequelize.DOUBLE,
         allowNull:false
     }
@@ -27,9 +31,13 @@ module.exports=function(sequelize
     freezeTableName:true});
 DetalleProducto.belongsTo(Producto,{
     foreignKey:'id_producto',
-    constraints: true
+    constraints: false
 });
 
+DetalleProducto.belongsTo(Venta,{
+    foreignKey:'id_venta',
+    constraints: false
+});
 return DetalleProducto;
 };
 

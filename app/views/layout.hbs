@@ -15,8 +15,8 @@
         <link href="/vendors/elegant-icon/style.css" rel="stylesheet">
         <!-- Bootstrap -->
         <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
-          <script src="/js/popper.min.js"></script>
-         <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/popper.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
         <link href="/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Rev slider css -->
@@ -31,9 +31,36 @@
         <link href="/css/style.css" rel="stylesheet">
         <link href="/css/responsive.css" rel="stylesheet">
         <!--jghjhgj-->
-       
+         <script>
+            function mostrarNroItems(data) {
+                var cant = 0;
+                var prize = 0;
+                $.each(data, function (i, item) {
+                    cant += item.cant;
+                    prize += item.pt;
+                    console.log(item);
+                });
+                $("#nro_items").html(cant + '  <b>$ ' + prize + '</b>');
+            }
+            function refrescar() {
+                var url = 'http://localhost:3000/josselynStore/compra/carrito/obtener';
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data, textStatus, jqXHR) {
+                        mostrarNroItems(data);
+                    }, error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(jqXHR.responseText);
+                    }
+                });
+            }
+            $(document).ready(function () {
+                refrescar();
+            });
+        </script>
 
-       
+
 
     </head>
     <body>
@@ -67,15 +94,21 @@
                                 <li><a href="#"><i class="fa fa-instagram"></i></a></li>
                                 <li><a href="#"><i class="fa fa-youtube-play"></i></a></li>
                             </ul>
+                            </br>
+                            
                             <ul class="top_right">
-                                <li class="user"><a href="/josselynStore/login"><i class="icon-user icons"></i></a></li>
-                                <li class="cart"><a href="#"><i class="icon-handbag icons"></i></a></li>
+                                {{#if login}}
+                                <li class="user"><a href="/josselynStore/cerrar_session" ><i class="icon-user icons"> Cerrar Sesion</i></a></li></br>
+                                <li><a href="#"><i id="nro_items" class="icon-handbag icons">0</i></a></li>
                                 <li class="h_price">
-                                    <select class="selectpicker">
-                                        <option>$0.00</option>
-
-                                    </select>
+                                    
+                                    <button class="btn-primary" ><a href="/josselynStore/venta">Ver Carrito</a></button>
+                                    
                                 </li>
+                                {{else}}
+                                <li class="user"><a href="/josselynStore/login"><i class="icon-user icons"> Iniciar Sesion</i></a></li>
+                                {{/if}}
+                                
                             </ul>
                         </div>
                     </div>
@@ -108,7 +141,7 @@
                                 </select>
                             </li>
                         </ul>
-                        
+
                         <ul class="navbar-nav">
                             {{#if roles}}
                             <li class="nav-item dropdown submenu active">
@@ -116,11 +149,11 @@
                                     Administrar <i class="fa fa-angle-down" aria-hidden="true"></i>
                                 </a>
                                 <ul class="dropdown-menu">
-                                  <li class="nav-item"><a class="nav-link"  href="/josselynStore/administrar/marca">Registro de Marcas</a></li>                                   
-                                  <li class="nav-item"><a class="nav-link"  href="/josselynStore/administrar/producto">Registro de Productos </a></li>   
+                                    <li class="nav-item"><a class="nav-link"  href="/josselynStore/administrar/marca">Registro de Marcas</a></li>                                   
+                                    <li class="nav-item"><a class="nav-link"  href="/josselynStore/administrar/producto">Registro de Productos </a></li>   
                                 </ul>
                             </li>
- {{/if }}
+                            {{/if }}
                             <li class="nav-item dropdown submenu">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Shop <i class="fa fa-angle-down" aria-hidden="true"></i>
@@ -199,11 +232,11 @@
 
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        
+
         <script src="/js/jquery.validate.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
-      
-        
+
+
         <!-- Rev slider js -->
         <script src="/vendors/revolution/js/jquery.themepunch.tools.min.js"></script>
         <script src="/vendors/revolution/js/jquery.themepunch.revolution.min.js"></script>
@@ -224,9 +257,9 @@
         <script src="/vendors/isotope/isotope.pkgd.min.js"></script>
         <script src="/vendors/magnify-popup/jquery.magnific-popup.min.js"></script>
         <script src="/vendors/vertical-slider/js/jQuery.verticalCarousel.js"></script>
-        
+
         <script src="/vendors/jquery-ui/jquery-ui.js"></script>
-    <script src="/js/theme.js"></script>
-    
+        <script src="/js/theme.js"></script>
+
     </body>
 </html>

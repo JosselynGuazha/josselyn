@@ -17,6 +17,12 @@ module.exports=function(sequelize, Sequelize){
 }, {timestamps:false,
     freezeTableName:true});
 
+ Marca.associate = function (models) {
+        models.marca.hasMany(models.producto, {
+            foreignKey: 'id_marca'
+        });
+    };
+
 return Marca;
 };
 

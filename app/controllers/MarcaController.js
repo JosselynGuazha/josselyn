@@ -11,7 +11,8 @@ class MarcaController {
             res.render('fragmentos/frm_registroMarca',
                     {titulo: "Administracion de Marcas",
                        //rol: req.user.rol,
-                        lista: marcas
+                        lista: marcas,
+                        login: req.isAuthenticated()
                         //info: (req.flash('info') != '') ? req.flash('info') : '',
                         //error: (req.flash('error') != '') ? req.flash('error') : ''
                     });

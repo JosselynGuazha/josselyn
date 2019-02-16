@@ -1,0 +1,201 @@
+
+<script>
+    var t = jQuery.noConflict();
+    t().ready(function () {
+        // validate signup form on keyup and submit
+        t("#formulario").validate({
+            rules: {
+                nro_casa: {
+                    required: true,
+                    minlength: 3
+                }
+            },
+            messages: {
+                nro_casa: {
+                    required: "Ingrese la marca del producto",
+                    minlength: "Minimo 2 caracteres"
+                }
+            }
+        });
+    });
+</script>
+
+<body class="align-content-center">
+    </br>
+    </br>
+    </br>
+
+    <header    data-textAlign="['left','left','left','left','left','center']" >
+        <h2>Direccion de Envio</h2>
+    </header>
+    </br>
+<div class="row" style="margin-top: 25px; margin-left: 50px; margin-right: 50px;" >
+        <a href="#"  class="btn btn-success" data-toggle="modal" data-target="#modal">Registrar Direccion de Envio</a>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Registrar Envio</h5>
+
+                </div>
+                <div class="modal-body">
+
+                    <form id="formulario" method="POST" action="/josselynStore/envio/direccion/guardar">
+                        <div class="form-group">
+                            <label for="Ciudad">Ciudad</label>
+                            <input type="text" class="form-control" id="ciudad" name="ciudad" aria-describedby="marcaHelp" placeholder="Ingrese Ciudad">
+                            <small id="marcaHelp" class="form-text text-muted">Ciudad de Envio.</small>
+                        </div>
+                        
+                         <div class="form-group">
+                            <label for="Barrio">Barrio</label>
+                            <input type="text" class="form-control" id="barrio" name="barrio" aria-describedby="marcaHelp" placeholder="Ingrese Barrio">
+                            <small id="marcaHelp" class="form-text text-muted">Barrio de Envio.</small>
+                        </div>
+                        
+                         <div class="form-group">
+                            <label for="calle_prin">Calle Principal</label>
+                            <input type="text" class="form-control" id="calle_prin" name="calle_prin" aria-describedby="marcaHelp" placeholder="Ingrese Calle Principal">
+                            <small id="marcaHelp" class="form-text text-muted">Calle Principal.</small>
+                        </div>
+                        
+                         <div class="form-group">
+                            <label for="calle_sec">Calle Secundaria</label>
+                            <input type="text" class="form-control" id="calle_sec" name="calle_sec" aria-describedby="marcaHelp" placeholder="Ingrese Calle Secundaria">
+                            <small id="marcaHelp" class="form-text text-muted">Calle Secundaria.</small>
+                        </div>
+                        
+                        
+                         <div class="form-group">
+                            <label for="num_casa">Numero de Casa</label>
+                            <input type="text" class="form-control" id="num_casa" name="num_casa" aria-describedby="marcaHelp" placeholder="Ingrese Numero de Casa">
+                            <small id="marcaHelp" class="form-text text-muted">Numero de Casa.</small>
+                        </div>
+                        
+                             <div class="form-group">
+                            <label for="referencia">Referencia</label>
+                            <input type="text" class="form-control" id="referencia" name="referencia" aria-describedby="marcaHelp" placeholder="Ingrese Referencia">
+                            <small id="marcaHelp" class="form-text text-muted">Referencia.</small>
+                        </div>
+                        
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- modals de edicion-->
+    <div class="modal fade" id="modal_e" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modificar</h5>
+
+                </div>
+                <div class="modal-body">
+                    <form id="formulario_e" method="POST" action="/josselynStore/envio/direccion/modificar">
+                        <input type="hidden" name="external" value="0" id="external"/>
+                        <div class="form-group">
+                            <label for="Ciudad">Ciudad</label>
+                            <input type="text" class="form-control" id="ciudad_e" name="ciudad" aria-describedby="marcaHelp" placeholder="Ingrese Ciudad">
+                            <small id="marcaHelp" class="form-text text-muted">Ciudad de Envio.</small>
+                        </div>
+                        
+                         <div class="form-group">
+                            <label for="Barrio">Barrio</label>
+                            <input type="text" class="form-control" id="barrio_e" name="barrio" aria-describedby="marcaHelp" placeholder="Ingrese Barrio">
+                            <small id="marcaHelp" class="form-text text-muted">Barrio de Envio.</small>
+                        </div>
+                        
+                         <div class="form-group">
+                            <label for="calle_prin">Calle Principal</label>
+                            <input type="text" class="form-control" id="calle_prin_e" name="calle_prin" aria-describedby="marcaHelp" placeholder="Ingrese Calle Principal">
+                            <small id="marcaHelp" class="form-text text-muted">Calle Principal.</small>
+                        </div>
+                        
+                         <div class="form-group">
+                            <label for="calle_sec">Calle Secundaria</label>
+                            <input type="text" class="form-control" id="calle_sec_e" name="calle_sec" aria-describedby="marcaHelp" placeholder="Ingrese Calle Secundaria">
+                            <small id="marcaHelp" class="form-text text-muted">Calle Secundaria.</small>
+                        </div>
+                        
+                        
+                         <div class="form-group">
+                            <label for="num_casa">Numero de Casa</label>
+                            <input type="text" class="form-control" id="num_casa_e" name="num_casa" aria-describedby="marcaHelp" placeholder="Ingrese Numero de Casa">
+                            <small id="marcaHelp" class="form-text text-muted">Numero de Casa.</small>
+                        </div>
+                        
+                             <div class="form-group">
+                            <label for="referencia">Referencia</label>
+                            <input type="text" class="form-control" id="referencia_e" name="referencia" aria-describedby="marcaHelp" placeholder="Ingrese Referencia">
+                            <small id="marcaHelp" class="form-text text-muted">Referencia.</small>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div  class="row" style="margin-top: 25px; margin-left: 50px; margin-right: 50px;">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nro</th><th>Ciudad</th><th>Calle Principal</th><th>Calle Secundaria</th><th>Barrio</th><th>Nro Casa</th>
+                    <th>Referencia</th><th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each lista as |direccion i|}}
+                <tr>
+                    <th scope="row">{{ i }}</th>
+                    <td> {{direccion.ciudad }} </td> 
+                    <td> {{direccion.calle_principal}} </td>
+                    <td> {{direccion.calle_secundaria}} </td>
+                     <td> {{direccion.barrio}} </td>
+                     <td> {{direccion.nro_casa}} </td>
+                     <td> {{direccion.referencia}} </td>
+                    
+                    <td>
+                        <a href="" id="{{ i }}" class="btn btn-primary"  data-toggle="modal"  data-target="#modal_e">Modificar</a>
+                    </td>
+            <script>
+                    t("#{{ i }}").click(function () {
+                    t("#external").val("{{ direccion.external_id }}");
+                    t("#ciudad_e").val("{{ direccion.ciudad}}");
+                    t("#calle_prin_e").val("{{ direccion.calle_principal }}");
+                    t("#calle_sec_e").val("{{ direccion.calle_secundaria }}");
+                    t("#barrio_e").val("{{ direccion.barrio }}");
+                    t("#num_casa_e").val("{{ direccion.nro_casa }}");
+                    t("#referencia_e").val("{{ direccion.nombre }}");
+                });
+            </script> 
+            </tr>
+            {{/each}}
+            </tbody>
+
+        </table>
+
+    </div>
+</body>
+
+
+
+
+
+
+
+

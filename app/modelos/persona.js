@@ -36,12 +36,28 @@ module.exports = function (sequelize, Sequelize) {
         createdAt: "fecha_registro",
         updateAt: 'fecha_modificacion'
     });
-
+ 
     Persona.belongsTo(Rol, {
         foreignKey: 'id_rol',
         constraints: true
 
     });
+    Persona.associate = function (models) {
+        models.persona.hasOne(models.cuenta, {
+            foreignKey: 'id_persona',
+            mandatory:   true
+        });
+        
+//  models.persona.hasOne(models.direccion, {
+//            foreignKey: 'id_persona'
+//            
+//            
+//        });
+        
+        models.persona.hasMany(models.venta, {
+            foreignKey: 'id_persona'
+        });
+    };
     return Persona;
 };
 

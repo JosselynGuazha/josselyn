@@ -46,6 +46,13 @@ module.exports = function (sequelize
         //para que no ponga s al final
     }, {timestamps: false,
         freezeTableName: true});
+    
+    Producto.associate= function (models){
+        models.producto.hasMany(models.detalleProducto, {
+            foreignKey:'id_producto'});
+    };
+    
+    
     Producto.belongsTo(Marca, {
         foreignKey: 'id_marca',
         constraints: true
