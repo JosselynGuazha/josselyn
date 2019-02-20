@@ -3,7 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/views/layout.hbs</file>
+            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/config/routes.js</file>
+            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/controllers/VentaController.js</file>
+            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/controllers/ProductoController.js</file>
+            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/views/fragmentos/pago.hbs</file>
+            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/views/fragmentos/frm_registroMarca.hbs</file>
+            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/views/fragmentos/carrito.hbs</file>
+            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/views/fragmentos/registro.hbs</file>
+            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/controllers/DireccionController.js</file>
+            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/views/fragmentos/frm_inicio.hbs</file>
+            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/views/fragmentos/frm_areacenter.hbs</file>
         </group>
     </open-files>
 </project-private>

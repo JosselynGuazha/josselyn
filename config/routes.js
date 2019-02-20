@@ -92,7 +92,7 @@ router.get('/josselynStore/compra/carrito/:external', auth,  carritoController.c
 
 //venta
 router.get('/josselynStore/venta', auth,  ventaController.mostrarCarritoFinalizado);
-router.post('/josselynStore/venta/guardar', auth,  ventaController.guardar);
+router.post('/josselynStore/venta/guardar/:total', auth,  ventaController.guardar);
 
 //envio
 router.get('/josselynStore/envio/direccion', auth,  direccionController.verDireccion);
@@ -101,8 +101,7 @@ router.post('/josselynStore/envio/direccion/modificar', auth,  direccionControll
 
 //pago
 router.get('/josselynStore/pago', auth,  direccionController.pago);
-
-
+router.get('/josselynStore/resultado', auth,  direccionController.resultadoPago);
 module.exports = router;
 
 

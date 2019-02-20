@@ -121,35 +121,42 @@
         <!--================End Slider Area =================-->
 
         <!--================Our Latest Product Area =================-->
-        <section class="our_latest_product">
-            <div class="container">
-                <div class="s_m_title">
-                    <h2>Nuestros ultimos Productos</h2>
-                </div>
-                <div class="l_product_slider owl-carousel">
-                    <div class="item">
-                        <div class="l_product_item">
-                            <div class="l_p_img">
-                                <img src="img/product/l-product-1.jpg" alt="">
-                            </div>
-                            <div class="l_p_text">
-                                <ul>
-                                    <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                                    <li><a class="add_cart_btn" href="#">Añadir Al carrito</a></li>
-                                    <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
-                                </ul>
-                                <h4>Womens Libero</h4>
-                                <h5><del>$45.50</del>  $40</h5>
-                            </div>
-                        </div>
-
+  <section class="our_latest_product">
+    <div class="container">
+        <div class="s_m_title">
+            <h2>Nuestros ultimos Productos</h2>
+        </div>
+        <div>
+            {{#each lista as |producto i|}}
+            <div class="item">
+                <div class="l_product_item">
+                    <div class="l_p_img">
+                        <img src="/img/{{ producto.foto }}" alt="picture" class="img-fluid" height="300" width="200">
                     </div>
-
-
-
+                    <div class="l_p_text">
+                        <ul>
+                            <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
+                            <li><a id="{{i}}_a" class="add_cart_btn" href="#">Añadir Al carrito</a></li>
+                              <script>
+                            $("#{{i}}_a").click(function () {
+                                agregarCarrito("{{producto.external_id}}");
+                            });
+                        </script>
+                            <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
+                            
+                        </ul>
+                        <h4>{{ producto.nombre }}</h4>
+                        <h5><del>$45.50</del>  $40</h5>
+                    </div>
                 </div>
+
             </div>
-        </section>
+
+            {{/each}}
+
+        </div>
+    </div>
+</section>
         <!--================End Our Latest Product Area =================-->
 
 
