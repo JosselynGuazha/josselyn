@@ -1,41 +1,4 @@
 
-<script>
-    var t = jQuery.noConflict();
-
-    t().ready(function () {
-
-        // validate signup form on keyup and submit
-        t("#formulario").validate({
-            rules: {
-                nombre: {
-                    required: true,
-                    minlength: 3
-                },
-                tipo: {
-                    required: true
-
-                },
-                talla: {required: true},
-                color: {required: true},
-                descripcion: {
-                    required: true
-
-                },
-                precio: {
-                    required: true,
-                    number: true
-                }
-
-            },
-            messages: {
-                nombre: {
-                    required: "Ingrese el nombre del Producto",
-                    minlength: "Minimo 2 caracteres"
-                }
-            }
-        });
-    });
-</script>
 <header style=" top:25px; margin-left: 50px; margin-right: 50px;">
     <br>
     <h2>Registro de Producto</h2>
@@ -54,14 +17,14 @@
                 <form id="formulario" method="POST" action="/josselynStore/administrar/producto/guardar">
                     <div class="form-group">
                         <label for="nombre">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre"  placeholder="Ingrese el nombre">
+                        <input type="text" class="form-control"  required id="nombre" name="nombre"  placeholder="Ingrese el nombre">
                         <small id="nombreHelp" class="form-text text-muted">Nombre del Producto.</small>
                     </div>
 
 
                     <div class="form-group">
                         <label for="tipo">Tipo</label>
-                        <select name="tipo" id="tipo">
+                        <select name="tipo" id="tipo" required>
                             <option value="deportivo">Deportivo</option>
                             <option value="casual">Casual</option>
                             <option value="formal">Formal</option>
@@ -69,8 +32,19 @@
                         <small id="tipoHelp" class="form-text text-muted">Tipo del Producto.</small>
                     </div>
                     <div class="form-group">
+                            <label for="categoria">Categoria</label>
+                            <select name="categoria" id="categoria" required>
+                                <option value="Blusa">Blusa</option>
+                                <option value="Pantalon">Pantalon</option>
+                                <option value="Chaqueta">Chaqueta</option>
+                                <option value="Vestido">Vestido</option>
+                              
+                            </select>
+                            <small id="tallaHelp" class="form-text text-muted">Categoria del Producto.</small>
+                        </div>
+                    <div class="form-group">
                         <label for="talla">Talla</label>
-                        <select name="talla" id="talla">
+                        <select name="talla" id="talla" required>
                             <option value="S">Small</option>
                             <option value="M">Medium</option>
                             <option value="L">Large</option>
@@ -81,13 +55,13 @@
                     </div>
                     <div class="form-group">
                         <label for="color">Color</label>
-                        <input type="text" class="form-control" name="color" id="color"  placeholder="Ingrese el color">
+                        <input type="text" class="form-control" required name="color" id="color"  placeholder="Ingrese el color">
                         <small id="colorHelp" class="form-text text-muted">Color del Producto.</small>
                     </div>
 
                     <div class="form-group">
                         <label for="marca">Marca</label>
-                        <select name="marca" id="marca">
+                        <select name="marca" id="marca" required>
                             {{#each listaM }}
                             <option value="{{id}}">{{nombre}}</option>
                             {{/each}}
@@ -97,17 +71,17 @@
 
                     <div class="form-group">
                         <label for="descripcion">Descripcion</label>
-                        <input type="text" class="form-control" name="descripcion"  placeholder="Ingrese descripcion">
+                        <input  required type="text" class="form-control" name="descripcion"  placeholder="Ingrese descripcion">
                         <small id="fechHelp" class="form-text text-muted">Descripcion del Producto.</small>
                     </div>
                     <div class="form-group">
                         <label for="cantidad">Cantidad</label>
-                        <input type="text" class="form-control" name="cantidad" id="cantidad" aria-describedby="cantidadHelp" placeholder="Ingrese la Cantidad del producto">
+                        <input required type="text" class="form-control" name="cantidad" id="cantidad" aria-describedby="cantidadHelp" placeholder="Ingrese la Cantidad del producto">
                         <small id="cantidadHelp" class="form-text text-muted">Cantidad.</small>
                     </div>
                     <div class="form-group">
                         <label for="precio">Precio</label>
-                        <input type="text" class="form-control" name="precio" aria-describedby="precioHelp" placeholder="Ingrese el precio">
+                        <input required type="text" class="form-control" name="precio" aria-describedby="precioHelp" placeholder="Ingrese el precio">
                         <small id="precioHelp" class="form-text text-muted">Precio del Producto.</small>
                     </div>
 
@@ -135,14 +109,14 @@
                         <input type="hidden" name="external" value="0" id="external"/>
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
-                            <input type="text" class="form-control" id="nombre_e" name="nombre"  placeholder="Ingrese el nombre">
+                            <input required type="text" class="form-control" id="nombre_e" name="nombre"  placeholder="Ingrese el nombre">
                             <small id="nombreHelp" class="form-text text-muted">Nombre del Producto.</small>
                         </div>
 
 
                         <div class="form-group">
                             <label for="tipo">Tipo</label>
-                            <select name="tipo" id="tipo_e">
+                            <select required name="tipo" id="tipo_e">
                                 <option value="deportivo">Deportivo</option>
                                 <option value="casual">Casual</option>
                                 <option value="formal">Formal</option>
@@ -150,8 +124,19 @@
                             <small id="tipoHelp" class="form-text text-muted">Tipo del Producto.</small>
                         </div>
                         <div class="form-group">
+                            <label for="categoria">Categoria</label>
+                            <select required name="categoria" id="categoria_e">
+                                <option value="Blusa">Blusa</option>
+                                <option value="Pantalon">Pantalon</option>
+                                <option value="Chaqueta">Chaqueta</option>
+                                <option value="Vestido">Vestido</option>
+                              
+                            </select>
+                            <small id="tallaHelp" class="form-text text-muted">Categoria del Producto.</small>
+                        </div>
+                        <div class="form-group">
                             <label for="talla">Talla</label>
-                            <select name="talla" id="talla_e">
+                            <select required name="talla" id="talla_e">
                                 <option value="S">Small</option>
                                 <option value="M">Medium</option>
                                 <option value="L">Large</option>
@@ -160,15 +145,16 @@
                             </select>
                             <small id="tallaHelp" class="form-text text-muted">Tipo del Producto.</small>
                         </div>
+                        
                         <div class="form-group">
                             <label for="color">Color</label>
-                            <input type="text" class="form-control" name="color" id="color_e" placeholder="Ingrese el color">
+                            <input required type="text" class="form-control" name="color" id="color_e" placeholder="Ingrese el color">
                             <small id="colorHelp" class="form-text text-muted">Color del Producto.</small>
                         </div>
 
                         <div class="form-group">
                             <label for="marca">Marca</label>
-                            <select name="marca" id="marca_e">
+                            <select name="marca" id="marca_e" required>
                                 {{#each listaM }}
                                 <option value="{{id}}">{{nombre}}</option>
                                 {{/each}}
@@ -178,17 +164,17 @@
 
                         <div class="form-group">
                             <label for="descripcion">Descripcion</label>
-                            <input type="text" class="form-control" name="descripcion" id="descripcion_e"  placeholder="Ingrese descripcion">
+                            <input required type="text" class="form-control" name="descripcion" id="descripcion_e"  placeholder="Ingrese descripcion">
                             <small id="fechHelp" class="form-text text-muted">Descripcion del Producto.</small>
                         </div>
                         <div class="form-group">
                             <label for="cantidad">Cantidad</label>
-                            <input type="text" class="form-control" name="cantidad" id="cantidad_e" aria-describedby="cantidadHelp" placeholder="Ingrese la Cantidad del producto">
+                            <input  required type="text" class="form-control" name="cantidad" id="cantidad_e" aria-describedby="cantidadHelp" placeholder="Ingrese la Cantidad del producto">
                             <small id="cantidadHelp" class="form-text text-muted">Cantidad.</small>
                         </div>
                         <div class="form-group">
                             <label for="precio">Precio</label>
-                            <input type="text" class="form-control" name="precio" id="precio_e" aria-describedby="precioHelp" placeholder="Ingrese el precio">
+                            <input  required type="text" class="form-control" name="precio" id="precio_e" aria-describedby="precioHelp" placeholder="Ingrese el precio">
                             <small id="precioHelp" class="form-text text-muted">Precio del Producto.</small>
                         </div>
 
@@ -208,7 +194,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Nro</th><th>Foto</th><th>Nombre</th><th>Color</th><th>Talla</th><th>Precio</th><th>Estado</th><th>Acciones</th>
+                <th>Nro</th><th>Foto</th><th>Categoria</th><th>Tipo</th><th>Nombre</th><th>Color</th><th>Talla</th><th>Precio</th><th>Estado</th><th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -217,14 +203,18 @@
                 <th scope="row">{{ i }}</th>
                 <td>
                     <img class="rounded" src="/img/{{ producto.foto }}" width="100"/> 
+                    <br>
                     <form action="/josselynStore/administrar/producto/guardar_foto/{{ producto.external_id }}" method="POST">
-                        <input class="custom-file-input" type="file" accept="image/image/jpeg/jpg/png" id="foto" name="foto"/>
+                        <br>
+                        <input type="file" accept="image/image/jpeg/jpg/png" id="foto" name="foto"/>
                         <div class="modal-footer">
                             <a href="/josselynStore/administrar/producto" class="btn btn-danger">Cancelar</a>
                             <button type="submit" class="btn btn-primary">Guardar</button>
                         </div>
-                    </form>
+                    </form> 
                 </td>
+                 <td>{{ producto.categoria }}</td>
+                <td>{{ producto.tipo }}</td>
                 <td>{{ producto.nombre }}</td>
                 <td>{{ producto.color }}</td>
                 <td>{{ producto.talla }}</td>
@@ -243,6 +233,7 @@
                             t("#tipo_e").val("{{ producto.tipo }}");
                             t("#talla_e").val("{{ producto.talla }}");
                             t("#color_e").val("{{ producto.color }}");
+                            t("#categoria_e").val("{{ producto.categoria }}");
                             t("#descripcion_e").val("{{ producto.descripcion }}");
                             t("#cantidad_e").val("{{ producto.cantidad }}");
                             t("#precio_e").val("{{ producto.precio }}");

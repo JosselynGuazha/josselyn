@@ -20,7 +20,7 @@ class ProductoController {
                     req.session.carrito = [];
                     console.log("************");
 
-                } 
+                }
                 console.log(req.session.carrito);
                 res.render('fragmentos/frm_inicio',
                         {
@@ -46,7 +46,7 @@ class ProductoController {
                     req.session.carrito = [];
                     console.log("************");
 
-                } 
+                }
                 console.log(req.session.carrito);
                 res.render('fragmentos/frm_inicio',
                         {
@@ -68,6 +68,26 @@ class ProductoController {
 
 
 
+
+
+    }
+    
+    verPrincipal(req, res) {
+        
+        if(req.isAuthenticated()){
+        res.redirect('/josselynStore/inicio');
+    }else{
+        Producto.findAll({include: {model: Marca}}).then(function (productos) {
+            res.render('fragmentos/frm_areacenter',
+                    { 
+                        lista: productos,
+                         title: 'Josselyn`s Store',
+                         login: req.isAuthenticated()
+                    });
+        });
+    }
+
+        
     }
 
     verProducto(req, res) {
@@ -124,7 +144,7 @@ class ProductoController {
             external_id: uuidv4(),
             nombre: req.body.nombre,
             foto: 'logo.png',
-            //fecha_creacion: req.body.fecha,
+            categoria: req.body.categoria,
             tipo: req.body.tipo,
             talla: req.body.talla,
             cantidad: req.body.cantidad,
@@ -172,7 +192,7 @@ class ProductoController {
         Producto.update({
             external_id: uuidv4(),
             nombre: req.body.nombre,
-            //fecha_creacion: req.body.fecha,          
+          categoria: req.body.categoria,         
             tipo: req.body.tipo,
             talla: req.body.talla,
             cantidad: req.body.cantidad,
@@ -187,42 +207,10 @@ class ProductoController {
             }
         });
     }
-    
-    guardarImagen(req, res) {
-        var form = new formidable.IncomingForm();
-        form.parse(req, function (err, fields, files) {
-            console.log(files.archivo);
-            if (files.archivo.size <= maxFileSize) {
-                var extension = files.archivo.name.split(".").pop().toLowerCase();
-                if (extensiones.includes(extension)) {
-                    var nombre = fields.external + "." + extension;
-                    fs.rename(files.archivo.path, "public/img/" + nombre, function (err) {
-                        if (err)
-                            next(err);
-                        Producto.update({
-                            foto: nombre,
-                        }, {where: {external_id: fields.external}}).then(function (updatedProducto, created) {
-                            if (updatedProducto) {
-                                //req.flash('info', 'Se ha subido correctamente', false);
-                                res.redirect('/josselyn/administrar/producto');
-                            }
-                        });
-                    });
-                } else {
-                    ProductoController.eliminar(files.archivo.path);
-                    req.flash('error', 'Error de extension', false);
-                    res.redirect('/josselyn/administrar/producto' + fields.external);
-                    console.log("error de extension");
-                }
-            } else {
-                ProductoController.eliminar(files.archivo.path);
-                req.flash('error', 'Error de tamanio se admite ' + maxFileSize, false);
-                res.redirect('/josselyn/administrar/vino/foto/' + fields.external);
-                console.log("error de tamanio solo se adminte " + maxFileSize);
 
-            }
-        });
-        /*console.log(req.params.external);
+    guardarImagen(req, res) {
+        
+        console.log(req.params.external);
          Producto.update({
          foto: req.body.foto
          }, {where: {external_id: req.params.external}}).then(function (updateProducto, created) {
@@ -234,18 +222,9 @@ class ProductoController {
          {
          console.log("Hola soy---");
          }
-         });*/
+         });
     }
-    static eliminar(link) {
-        fs.exists(link, function (exists) {
-            if (exists) {
-                console.log('File exists. Deleting now ...');
-                fs.unlinkSync(link);
-            } else {
-                console.log('No se borro ' + link);
-            }
-        });
-    }
+  
 
 }
 module.exports = ProductoController;

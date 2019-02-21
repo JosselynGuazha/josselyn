@@ -1,24 +1,4 @@
 
-<script>
-    var t = jQuery.noConflict();
-    t().ready(function () {
-        // validate signup form on keyup and submit
-        t("#formulario").validate({
-            rules: {
-                nro_casa: {
-                    required: true,
-                    minlength: 3
-                }
-            },
-            messages: {
-                nro_casa: {
-                    required: "Ingrese la marca del producto",
-                    minlength: "Minimo 2 caracteres"
-                }
-            }
-        });
-    });
-</script>
 <header style=" top:25px; margin-left: 550px; margin-right: 75px;">
     <br>
     <h2>Dirección</h2>
@@ -40,38 +20,38 @@
 
                     <div class="form-group">
                         <label for="Ciudad">Ciudad</label>
-                        <input value="{{ciudad}}" type="text" class="form-control" id="ciudad" name="ciudad" aria-describedby="marcaHelp" placeholder="Ingrese Ciudad">
+                        <input required value="{{ciudad}}" type="text" class="form-control" id="ciudad" name="ciudad" aria-describedby="marcaHelp" placeholder="Ingrese Ciudad">
                         <small id="marcaHelp" class="form-text text-muted">Ciudad de Envio.</small>
                     </div>
 
                     <div class="form-group">
                         <label for="Barrio">Barrio</label>
-                        <input type="text" class="form-control" id="barrio" name="barrio" aria-describedby="marcaHelp" placeholder="Ingrese Barrio">
+                        <input  required type="text" class="form-control" id="barrio" name="barrio" aria-describedby="marcaHelp" placeholder="Ingrese Barrio">
                         <small id="marcaHelp" class="form-text text-muted">Barrio de Envio.</small>
                     </div>
 
                     <div class="form-group">
                         <label for="calle_prin">Calle Principal</label>
-                        <input type="text" class="form-control" id="calle_prin" name="calle_prin" aria-describedby="marcaHelp" placeholder="Ingrese Calle Principal">
+                        <input required type="text" class="form-control" id="calle_prin" name="calle_prin" aria-describedby="marcaHelp" placeholder="Ingrese Calle Principal">
                         <small id="marcaHelp" class="form-text text-muted">Calle Principal.</small>
                     </div>
 
                     <div class="form-group">
                         <label for="calle_sec">Calle Secundaria</label>
-                        <input type="text" class="form-control" id="calle_sec" name="calle_sec" aria-describedby="marcaHelp" placeholder="Ingrese Calle Secundaria">
+                        <input required type="text" class="form-control" id="calle_sec" name="calle_sec" aria-describedby="marcaHelp" placeholder="Ingrese Calle Secundaria">
                         <small id="marcaHelp" class="form-text text-muted">Calle Secundaria.</small>
                     </div>
 
 
                     <div class="form-group">
                         <label for="num_casa">Numero de Casa</label>
-                        <input type="text" class="form-control" id="num_casa" name="num_casa" aria-describedby="marcaHelp" placeholder="Ingrese Numero de Casa">
+                        <input required type="text" class="form-control" id="num_casa" name="num_casa" aria-describedby="marcaHelp" placeholder="Ingrese Numero de Casa">
                         <small id="marcaHelp" class="form-text text-muted">Numero de Casa.</small>
                     </div>
 
                     <div class="form-group">
                         <label for="referencia">Referencia</label>
-                        <input type="text" class="form-control" id="referencia" name="referencia" aria-describedby="marcaHelp" placeholder="Ingrese Referencia">
+                        <input  required type="text" class="form-control" id="referencia" name="referencia" aria-describedby="marcaHelp" placeholder="Ingrese Referencia">
                         <small id="marcaHelp" class="form-text text-muted">Referencia.</small>
                     </div>
 

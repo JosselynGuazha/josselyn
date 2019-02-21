@@ -39,6 +39,9 @@ module.exports = function (sequelize
             type: Sequelize.DOUBLE(10, 2)
         },
         foto: {
+            type: Sequelize.TEXT
+        },
+        categoria: {
             type: Sequelize.STRING(50)
         }
 

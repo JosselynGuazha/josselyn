@@ -51,7 +51,7 @@
         });
     }
     function cargarCarro() {
-        var url = 'http://localhost:3000/josselynStore/compra/carrito/obtener';
+        var url = 'http://localhost:3000/josselynStore/compra/carrito/obtener/';
         $.ajax({
             url: url,
             type: 'GET',
@@ -76,8 +76,9 @@
         {{#if mensaje}}
         <div class="alert alert-warning">{{error}}</div>
         {{/if}}
-        
+
         <form method="POST" action="/josselynStore/venta/guardar" style="margin-left: 550px; margin-right: 350px;">
+            <input type="hidden" name="pt" value="{{pt}}"/>
             <table id="tabla">
                 <thead>
                     <tr>
@@ -88,11 +89,10 @@
                         <th>PT</th>
                     </tr>
                 </thead>
-                 <tbody>
+                <tbody>
                 </tbody>
             </table>      
-
-            <button id="comprar" data-toggle="modal" data-target="#modal"><a>Comprar</a></button>
+            <input type="submit" id="comprar" value="Comprar"/>
         </form>
     </div>
 </div>

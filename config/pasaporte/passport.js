@@ -70,48 +70,53 @@ module.exports = function (passport, cuenta, persona, rol) {
                                             external_id: uuidv4(),
                                             id_rol: rol.id
                                         };
-                                Persona.create(dataPersona).then(function (newPersona, created) {
-                                    if (!newPersona) {
-
-                                        return done(null, false);
+                                        
+                                        
+                                        //verificar si cedula existe
+                                Persona.findOne({
+                                    where: {
+                                        cedula: req.body.cedula
                                     }
-                                    if (newPersona) {
-                                        console.log("Se ha creado la persona: " + newPersona.id);
-                                        var dataCuenta = {
-                                            correo: email,
-                                            clave: userPassword,
-                                            id_persona: newPersona.id,
-                                            external_id: uuidv4()
-                                        };
-                                        Cuenta.create(dataCuenta).then(function (newCuenta, created) {
-                                            if (newCuenta) {
-                                                console.log("Se ha creado la cuenta: " + newCuenta.id);
-                                                return done(null, newCuenta);
-                                            }
-                                            if (!newCuenta) {
-                                                console.log("cuenta no se pudo crear");
-                                                return done(null, false);
-                                            }
-
+                                }).then(function (persona) {
+                                    if (persona)
+                                    {
+                                        return done(null, false, {
+                                            message: req.flash('correo_repetido', 'La cedula ya existe')
                                         });
 
-                                        /*var data =
-                                         {
-                                         usuario: email,
-                                         clave: userPassword,
-                                         id_persona: newPersona.id
-                                         };
-                                         
-                                         Cuenta.create(data).then(function (newCuenta, created) {
-                                         if (!newCuenta) {
-                                         return done(null, false);
-                                         }
-                                         if (newCuenta) {
-                                         return done(null, newCuenta);
-                                         }
-                                         });*/
+                                    } else {
+
+                                        Persona.create(dataPersona).then(function (newPersona, created) {
+                                            if (!newPersona) {
+
+                                                return done(null, false);
+                                            }
+                                            if (newPersona) {
+                                                console.log("Se ha creado la persona: " + newPersona.id);
+                                                var dataCuenta = {
+                                                    correo: email,
+                                                    clave: userPassword,
+                                                    id_persona: newPersona.id,
+                                                    external_id: uuidv4()
+                                                };
+                                                Cuenta.create(dataCuenta).then(function (newCuenta, created) {
+                                                    if (newCuenta) {
+                                                        console.log("Se ha creado la cuenta: " + newCuenta.id);
+                                                        return done(null, newCuenta);
+                                                    }
+                                                    if (!newCuenta) {
+                                                        console.log("cuenta no se pudo crear");
+                                                        return done(null, false);
+                                                    }
+
+                                                });
+                                            }
+                                        });
+
+
                                     }
                                 });
+                          
                             } else {
                                 return done(null, false, {
                                     message: 'El rol no existe'

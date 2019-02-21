@@ -38,45 +38,47 @@
                             Registrarse
                         </span>
                     </div>
-
+                    {{#if error}}
+                    <div class="alert alert-warning">{{error}}</div>
+                    {{/if}}
                     <form id="formulario" class="login100-form validate-form" method="POST" action="/josselynStore/registro/guardar">
                         <div class="wrap-input100 validate-input m-b-26" data-validate=" Ingrese Nombre ">
                             <span class="label-input100">Nombres</span>
-                            <input class="input100" type="text" name="nombres" placeholder="Ingrese Nombre">
+                            <input class="input100" type="text" name="nombres" placeholder="Ingrese Nombre" required>
                             <span class="focus-input100"></span>
                         </div>
 
-                        <div class="wrap-input100 validate-input m-b-18" data-validate = "Ingrese Apellido">
+                        <div class="wrap-input100 validate-input m-b-18" data-validate = "Ingrese Apellido" >
                             <span class="label-input100">Apellidos</span>
-                            <input class="input100" type="text" name="apellidos" placeholder="Ingrese Apellido">
+                            <input class="input100" type="text" name="apellidos" placeholder="Ingrese Apellido" required>
                             <span class="focus-input100"></span>
                         </div>
 
                         
                         <div class="wrap-input100 validate-input m-b-18" data-validate = "Ingrese Cedula">
                             <span class="label-input100">Cedula</span>
-                            <input class="input100" type="text" name="cedula" placeholder="Ingrese Cedula">
+                            <input class="input100" type="text" name="cedula" placeholder="Ingrese Cedula" required>
                             <span class="focus-input100"></span>
                         </div>
                         
                         <div class="wrap-input100 validate-input m-b-18" data-validate = "Ingrese Direccion">
                             <span class="label-input100">Direccion</span>
-                            <input class="input100" type="text" name="direccion" placeholder="Ingrese Direccion">
+                            <input class="input100" type="text" name="direccion" placeholder="Ingrese Direccion" required>
                             <span class="focus-input100"></span>
                         </div>
                           <div class="wrap-input100 validate-input m-b-18" data-validate = "Ingrese Telefono">
                             <span class="label-input100">Telefono</span>
-                            <input class="input100" type="text" name="telefono" placeholder="Ingrese Telefono">
+                            <input class="input100" type="text" name="telefono" placeholder="Ingrese Telefono" required>
                             <span class="focus-input100"></span>
                         </div>
                          <div class="wrap-input100 validate-input m-b-18" data-validate = "Ingrese Correo">
                             <span class="label-input100">Correo</span>
-                            <input class="input100" type="text" name="correo" placeholder="Ingrese Correo">
+                            <input class="input100" type="text" name="correo" placeholder="Ingrese Correo" required>
                             <span class="focus-input100"></span>
                         </div>
                         <div class="wrap-input100 validate-input m-b-18" data-validate = "Ingrese clave">
                             <span class="label-input100">Clave</span>
-                            <input class="input100" type="password" name="clave" placeholder="Ingrese Contraseña">
+                            <input class="input100" type="password" name="clave" placeholder="Ingrese Contraseña" required>
                             <span class="focus-input100"></span>
                         </div>
                        

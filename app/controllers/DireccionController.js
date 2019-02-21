@@ -2,6 +2,7 @@
 var modelos = require('../modelos');
 var Direccion = modelos.direccion;
 var Persona = modelos.persona;
+var Venta = modelos.venta;
 const uuidv4 = require('uuid/v4');
 
 var https = require('https');
@@ -33,7 +34,7 @@ class DireccionController {
                     } else {
                         res.render('fragmentos/frm_direccion_cliente_1',
                                 {titulo: "Registro de Direccion",
-                                    rol: req.user.rol,
+                                    rol: req.user.rol
                                     //login: req.isAuthenticated()
                                     //info: (req.flash('info') != '') ? req.flash('info') : '',
                                     //error: (req.flash('error') != '') ? req.flash('error') : ''
@@ -148,13 +149,14 @@ class DireccionController {
     }
 
     pago(req, res) {
+       
         function request(callback) {
             var path = '/v1/checkouts';
             var data = querystring.stringify({
                 'authentication.userId': '8a8294175d602369015d73bf00e5180c',
                 'authentication.password': 'dMq5MaTD5r',
                 'authentication.entityId': '8a8294175d602369015d73bf009f1808',
-                'amount': 'req.params.tolal',
+                'amount': 'req.params.pt',
                 'currency': 'USD',
                 'paymentType': 'DB'
             });
@@ -178,12 +180,14 @@ class DireccionController {
             postRequest.write(data);
             postRequest.end();
         }
+        
         request(function (responseData) {
             console.log(responseData);
             checkout = responseData.id;
             res.render('fragmentos/pago',
                     {Checkout: checkout});
         });
+        
     }
     resultadoPago(req, res) {
         function request(callback) {

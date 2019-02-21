@@ -5,14 +5,13 @@
         <group>
             <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/config/routes.js</file>
             <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/controllers/VentaController.js</file>
-            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/controllers/ProductoController.js</file>
-            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/views/fragmentos/pago.hbs</file>
-            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/views/fragmentos/frm_registroMarca.hbs</file>
+            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/views/fragmentos/frm_registroProducto.hbs</file>
             <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/views/fragmentos/carrito.hbs</file>
-            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/views/fragmentos/registro.hbs</file>
-            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/controllers/DireccionController.js</file>
+            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/modelos/venta.js</file>
             <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/views/fragmentos/frm_inicio.hbs</file>
-            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/views/fragmentos/frm_areacenter.hbs</file>
+            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/modelos/producto.js</file>
+            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/controllers/DireccionController.js</file>
+            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/controllers/CarritoController.js</file>
         </group>
     </open-files>
 </project-private>

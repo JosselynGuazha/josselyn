@@ -1,25 +1,6 @@
 
 
-<script>
-    var t = jQuery.noConflict();
-    t().ready(function () {
-        // validate signup form on keyup and submit
-        t("#formulario").validate({
-            rules: {
-                nombre: {
-                    required: true,
-                    minlength: 3
-                }
-            },
-            messages: {
-                nombre: {
-                    required: "Ingrese la marca del producto",
-                    minlength: "Minimo 2 caracteres"
-                }
-            }
-        });
-    });
-</script>
+
 
 <body class="align-content-center">
     </br>
@@ -48,7 +29,7 @@
                     <form id="formulario" method="POST" action="/josselynStore/administrar/marca/guardar">
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" aria-describedby="marcaHelp" placeholder="Ingrese el nombre">
+                            <input type="text" class="form-control" required id="nombre" name="nombre" aria-describedby="marcaHelp" placeholder="Ingrese el nombre">
                             <small id="marcaHelp" class="form-text text-muted">Marca del producto.</small>
                         </div>
                         <div class="modal-footer">

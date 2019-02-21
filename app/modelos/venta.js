@@ -25,6 +25,10 @@ module.exports = function (sequelize, Sequelize){
         },
         total: {
             type: Sequelize.DOUBLE
+        },
+        estado: {
+            type: Sequelize.BOOLEAN,
+            defaultValue: false
         }
     }, {freezeTableName: true, timestamps: false});
     
