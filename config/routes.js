@@ -72,8 +72,10 @@ router.post('/josselynStore/administrar/marca/modificar',auth,MarcaController.mo
 
 //productos
 router.get('/josselynStore/administrar/producto', auth, ProductoController.verProducto);
+router.get('/josselynStore/administrar/producto/todos', auth, ProductoController.verProductoTodos);
 router.post('/josselynStore/administrar/producto/guardar',auth,ProductoController.guardar);
 router.post('/josselynStore/administrar/producto/modificar',auth,ProductoController.modificar);
+router.post('/buscar/categoria', ProductoController.verBuscarCategoria);
 
 router.post('/josselynStore/administrar/producto/guardar_foto/:external', auth, ProductoController.guardarImagen);
 //router.post('/josselynStore/administrar/producto/guardar_foto', auth, ProductoController.guardarImagen);

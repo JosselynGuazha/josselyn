@@ -43,6 +43,10 @@ module.exports = function (sequelize
         },
         categoria: {
             type: Sequelize.STRING(50)
+        },
+        estado: {
+            type: Sequelize.BOOLEAN,
+            defaultValue: true
         }
 
 

@@ -14,11 +14,10 @@
         });
     }
 </script>
+
 <div>
-    <h1>Bienvenido {{rol}}</h1>
+    <h5 style=" margin-left: 200px; margin-right: 75px; margin-top: 20px;"> Bienvenido {{rol}}</h5>
 </div>
-
-
 <!--================Slider Area =================-->
 <section class="main_slider_area">
     <div class="container">
@@ -142,41 +141,42 @@
 
 
 <!--================Our Latest Product Area =================-->
-<section class="our_latest_product">
-    <div class="container">
-        <div class="s_m_title">
-            <h2>Nuestros ultimos Productos</h2>
-        </div>
-        <div>
+<section>
+
+    
+
+    <!-- Page Content -->
+    <div class="container page-top">
+
+
+
+        <div class="row">
+
             {{#each lista as |producto i|}}
-            <div class="item">
-                <div class="l_product_item">
-                    <div class="l_p_img">
-                        <img src="/img/{{ producto.foto }}" alt="picture" class="img-fluid" height="300" width="200">
-                    </div>
-                    <div class="l_p_text">
-                        <ul>
-                            <li class="p_icon"><a href="#"><i class="icon_piechart"></i></a></li>
-                            <li><a id="{{i}}_a" class="add_cart_btn" href="#">Añadir Al carrito</a></li>
-                              <script>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <div>
+                    <img alt="picture" src="/img/{{ producto.foto }}" class="img-fluid" height="300" width="200">
+                    <h3 class="text-center my-3"></h3>
+                    <div>
+                        <h4>{{ producto.nombre }}</h4>
+                        <h5 >$ {{ producto.precio }}</h5>
+                        <h6>{{ producto.descripcion }}</h6>
+                        <a id="{{i}}_a" class="add_cart_btn" href="#">Añadir Al carrito</a>     
+                     <script>
                             $("#{{i}}_a").click(function () {
                                 agregarCarrito("{{producto.external_id}}");
                             });
                         </script>
-                            <li class="p_icon"><a href="#"><i class="icon_heart_alt"></i></a></li>
-                            
-                        </ul>
-                        <h4>{{ producto.nombre }}</h4>
-                        <h5><del>$45.50</del>  $40</h5>
                     </div>
+
                 </div>
-
             </div>
-
             {{/each}}
 
         </div>
     </div>
+
+
 </section>
 <!--================End Our Latest Product Area =================-->
 

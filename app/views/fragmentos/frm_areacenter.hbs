@@ -1,4 +1,6 @@
-
+<div>
+    <h5 style=" margin-left: 200px; margin-right: 75px; margin-top: 20px;"> Bienvenido {{rol}}</h5>
+</div>
 <!--================Slider Area =================-->
 <section class="main_slider_area">
     <div class="container">
@@ -123,16 +125,9 @@
 <!--================Our Latest Product Area =================-->
 
 <section>
-
-    
-
     <!-- Page Content -->
     <div class="container page-top">
-
-
-
         <div class="row">
-
             {{#each lista as |producto i|}}
             <div class="col-lg-3 col-md-4 col-xs-6 thumb">
                 <div>
@@ -141,8 +136,8 @@
                     <div>
                         <h4>{{ producto.nombre }}</h4>
                         <h5><del>$ {{ producto.precio }}</del> $ {{ producto.precio }}</h5>
-                        <h6>{{ producto.descripcion }}</h6>
-                        <button id="carrito" class="glyphicon glyphicon-shopping-cart" type="button"> Carrito</button>     
+                        <h6 style=" ">{{ producto.descripcion }}</h6>
+                        <a class="add_cart_btn" href="/josselynStore/login">Añadir Al carrito</a>     
                     </div>
 
                 </div>
@@ -214,6 +209,4 @@
     </div>
 </section>
 <!--================End Product_listing Area =================-->
-
-
 

@@ -19,6 +19,7 @@
     "flash": "^1.1.0",
     "formidable": "^1.2.1",
     "hbs": "~4.0.1",
+    "html-pdf": "^2.2.0",
     "http-errors": "~1.6.2",
     "morgan": "~1.9.0",
     "mysql2": "^1.6.4",

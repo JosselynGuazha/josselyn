@@ -9,8 +9,7 @@ const uuidv4 = require('uuid/v4');
 class VentaController {
     mostrarCarritoFinalizado(req, res) {
         res.render('fragmentos/carrito',
-                {titulo: "Venta",
-               
+                {titulo: "Venta",              
                     rol: req.user.rol,
                     mensaje:req.flash("mensajito"),
                     login: req.isAuthenticated()

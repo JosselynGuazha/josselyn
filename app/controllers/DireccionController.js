@@ -24,8 +24,8 @@ class DireccionController {
                             res.render('fragmentos/frm_direccion_cliente',
                                     {titulo: "Registro de Direccion",
                                         rol: req.user.rol,
-                                        lista: direcciones
-                                                //login: req.isAuthenticated()
+                                        lista: direcciones,
+                                        login: req.isAuthenticated()
                                                 //info: (req.flash('info') != '') ? req.flash('info') : '',
                                                 //error: (req.flash('error') != '') ? req.flash('error') : ''
                                     });
@@ -34,8 +34,8 @@ class DireccionController {
                     } else {
                         res.render('fragmentos/frm_direccion_cliente_1',
                                 {titulo: "Registro de Direccion",
-                                    rol: req.user.rol
-                                    //login: req.isAuthenticated()
+                                    rol: req.user.rol,
+                                    login: req.isAuthenticated()
                                     //info: (req.flash('info') != '') ? req.flash('info') : '',
                                     //error: (req.flash('error') != '') ? req.flash('error') : ''
                                 });
@@ -148,47 +148,47 @@ class DireccionController {
         });
     }
 
-    pago(req, res) {
-       
-        function request(callback) {
-            var path = '/v1/checkouts';
-            var data = querystring.stringify({
-                'authentication.userId': '8a8294175d602369015d73bf00e5180c',
-                'authentication.password': 'dMq5MaTD5r',
-                'authentication.entityId': '8a8294175d602369015d73bf009f1808',
-                'amount': 'req.params.pt',
-                'currency': 'USD',
-                'paymentType': 'DB'
-            });
-            var options = {
-                port: 443,
-                host: 'test.oppwa.com',
-                path: path,
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Content-Length': data.length
-                }
-            };
-            var postRequest = https.request(options, function (res) {
-                res.setEncoding('utf8');
-                res.on('data', function (chunk) {
-                    jsonRes = JSON.parse(chunk);
-                    return callback(jsonRes);
+        pago(req, res) {
+
+            function request(callback) {
+                var path = '/v1/checkouts';
+                var data = querystring.stringify({
+                    'authentication.userId': '8a8294175d602369015d73bf00e5180c',
+                    'authentication.password': 'dMq5MaTD5r',
+                    'authentication.entityId': '8a8294175d602369015d73bf009f1808',
+                    'amount': 'req.params.pt',
+                    'currency': 'USD',
+                    'paymentType': 'DB'
                 });
+                var options = {
+                    port: 443,
+                    host: 'test.oppwa.com',
+                    path: path,
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Content-Length': data.length
+                    }
+                };
+                var postRequest = https.request(options, function (res) {
+                    res.setEncoding('utf8');
+                    res.on('data', function (chunk) {
+                        jsonRes = JSON.parse(chunk);
+                        return callback(jsonRes);
+                    });
+                });
+                postRequest.write(data);
+                postRequest.end();
+            }
+
+            request(function (responseData) {
+                console.log(responseData);
+                checkout = responseData.id;
+                res.render('fragmentos/pago',
+                        {Checkout: checkout});
             });
-            postRequest.write(data);
-            postRequest.end();
+
         }
-        
-        request(function (responseData) {
-            console.log(responseData);
-            checkout = responseData.id;
-            res.render('fragmentos/pago',
-                    {Checkout: checkout});
-        });
-        
-    }
     resultadoPago(req, res) {
         function request(callback) {
             var path = '/v1/checkouts/' + checkout + '/payment';

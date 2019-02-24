@@ -27,112 +27,112 @@
         <!-- Extra plugin css -->
         <link href="/vendors/owl-carousel/owl.carousel.min.css" rel="stylesheet">
         <link href="/vendors/bootstrap-selector/css/bootstrap-select.min.css" rel="stylesheet">
-          <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
-<!------ Include the above in your HEAD tag ---------->
+        <!------ Include the above in your HEAD tag ---------->
 
 
 
         <link href="/css/style.css" rel="stylesheet">
         <link href="/css/responsive.css" rel="stylesheet">
         <!--jghjhgj-->
-        
+
         <script>
 function mostrarNroItems(data) {
-   var cant = 0;
-   var prize = 0;
-   $.each(data, function (i, item) {
-       cant += item.cant;
-       prize += item.pt;
-       console.log(item);
-   });
-   $("#nro_items").html(cant + '  <b>$ ' + prize + '</b>');
+    var cant = 0;
+    var prize = 0;
+    $.each(data, function (i, item) {
+        cant += item.cant;
+        prize += item.pt;
+        console.log(item);
+    });
+    $("#nro_items").html(cant + '  <b>$ ' + prize + '</b>');
 }
 function refrescar() {
-   var url = 'http://localhost:3000/josselynStore/compra/carrito/obtener';
-   $.ajax({
-       url: url,
-       type: 'GET',
-       dataType: 'json',
-       success: function (data, textStatus, jqXHR) {
-           mostrarNroItems(data);
-       }, error: function (jqXHR, textStatus, errorThrown) {
-           console.log(jqXHR.responseText);
-       }
-   });
+    var url = 'http://localhost:3000/josselynStore/compra/carrito/obtener';
+    $.ajax({
+        url: url,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data, textStatus, jqXHR) {
+            mostrarNroItems(data);
+        }, error: function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR.responseText);
+        }
+    });
 }
 $(document).ready(function () {
-   refrescar();
+    refrescar();
 });
 
-$(document).ready(function(){
-  $(".fancybox").fancybox({
+$(document).ready(function () {
+    $(".fancybox").fancybox({
         openEffect: "none",
         closeEffect: "none"
     });
-    
-    $(".zoom").hover(function(){
-		
-		$(this).addClass('transition');
-	}, function(){
-        
-		$(this).removeClass('transition');
-	});
+
+    $(".zoom").hover(function () {
+
+        $(this).addClass('transition');
+    }, function () {
+
+        $(this).removeClass('transition');
+    });
 });
         </script>
 
-      <style>
-      
-
-        #demo {
-            height:100%;
-            position:relative;
-            overflow:hidden;
-        }
+        <style>
 
 
-        .green{
-            background-color:#6fb936;
-        }
-        .thumb{
-            margin-bottom: 30px;
-        }
-
-        .page-top{
-            margin-top:85px;
-        }
+            #demo {
+                height:100%;
+                position:relative;
+                overflow:hidden;
+            }
 
 
-        img.zoom {
-            width: 100%;
-            height: 200px;
-            border-radius:5px;
-            object-fit:cover;
-            -webkit-transition: all .3s ease-in-out;
-            -moz-transition: all .3s ease-in-out;
-            -o-transition: all .3s ease-in-out;
-            -ms-transition: all .3s ease-in-out;
-        }
+            .green{
+                background-color:#6fb936;
+            }
+            .thumb{
+                margin-bottom: 30px;
+            }
+
+            .page-top{
+                margin-top:85px;
+            }
 
 
-        .transition {
-            -webkit-transform: scale(1.2); 
-            -moz-transform: scale(1.2);
-            -o-transform: scale(1.2);
-            transform: scale(1.2);
-        }
-        .modal-header {
+            img.zoom {
+                width: 100%;
+                height: 200px;
+                border-radius:5px;
+                object-fit:cover;
+                -webkit-transition: all .3s ease-in-out;
+                -moz-transition: all .3s ease-in-out;
+                -o-transition: all .3s ease-in-out;
+                -ms-transition: all .3s ease-in-out;
+            }
 
-            border-bottom: none;
-        }
-        .modal-title {
-            color:#000;
-        }
-        .modal-footer{
-            display:none;  
-        }
 
-    </style>
+            .transition {
+                -webkit-transform: scale(1.2); 
+                -moz-transform: scale(1.2);
+                -o-transform: scale(1.2);
+                transform: scale(1.2);
+            }
+            .modal-header {
+
+                border-bottom: none;
+            }
+            .modal-title {
+                color:#000;
+            }
+            .modal-footer{
+                display:none;  
+            }
+
+        </style>
 
     </head>
     <body>
@@ -146,7 +146,7 @@ $(document).ready(function(){
                             <div class="input-group">
 
                                 <span class="input-group-btn">
-                                    <button class="btn btn-secondary" type="button"><i class="icon-magnifier"></i></button>
+                                    <button class="btn btn-secondary" type="button"></button>
                                 </span>
                             </div>
                         </div>
@@ -171,6 +171,8 @@ $(document).ready(function(){
                             <ul class="top_right">
                                 {{#if login}}
                                 <li class="user"><a href="/josselynStore/cerrar_session" ><i class="icon-user icons"> Cerrar Sesion</i></a></li></br>
+                                <li class="user"><a href=""><i class="icon-pencil icons"> Editar Perfil</i></a></li></br>
+
                                 <li><a href="#"><i id="nro_items" class="icon-handbag icons">0</i></a></li>
                                 <li class="h_price">
 
@@ -209,10 +211,11 @@ $(document).ready(function(){
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Categoria   <i class="fa fa-angle-down" aria-hidden="true"></i>
                                 </a>
+                                {{#each lista}}
                                 <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link"  href="#">Blusa</a></li>                                   
-                                    <li class="nav-item"><a class="nav-link"  href="#">Pantalon</a></li>   
+                                    <li class="nav-item"><a class="nav-link"  href="#">{{categoria}}</a></li>  
                                 </ul>
+                                {{/each}}
                             </li>
                         </ul>
 
@@ -233,9 +236,22 @@ $(document).ready(function(){
                 </nav>
             </div>
         </header>
+      
+        <form class="example" action="/buscar/categoria" method="POST" style=" margin-left: 200px; margin-right: 75px; margin-top: 20px;">
+                <input type="text" placeholder="Search.." name="buscar">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+    
         <!--================End Menu Area =================-->
+
         {{{body}}}
+
         <!--================Footer Area =================-->
+
+
+
+
+
         <footer class="footer_area">
             <div class="container">
                 <div class="footer_widgets">

@@ -32,16 +32,16 @@
                         <small id="tipoHelp" class="form-text text-muted">Tipo del Producto.</small>
                     </div>
                     <div class="form-group">
-                            <label for="categoria">Categoria</label>
-                            <select name="categoria" id="categoria" required>
-                                <option value="Blusa">Blusa</option>
-                                <option value="Pantalon">Pantalon</option>
-                                <option value="Chaqueta">Chaqueta</option>
-                                <option value="Vestido">Vestido</option>
-                              
-                            </select>
-                            <small id="tallaHelp" class="form-text text-muted">Categoria del Producto.</small>
-                        </div>
+                        <label for="categoria">Categoria</label>
+                        <select name="categoria" id="categoria" required>
+                            <option value="Blusa">Blusa</option>
+                            <option value="Pantalon">Pantalon</option>
+                            <option value="Chaqueta">Chaqueta</option>
+                            <option value="Vestido">Vestido</option>
+
+                        </select>
+                        <small id="tallaHelp" class="form-text text-muted">Categoria del Producto.</small>
+                    </div>
                     <div class="form-group">
                         <label for="talla">Talla</label>
                         <select name="talla" id="talla" required>
@@ -85,7 +85,7 @@
                         <small id="precioHelp" class="form-text text-muted">Precio del Producto.</small>
                     </div>
 
-                    <div class="modal-footer">
+                    <div class="form-group">
                         <a href="/josselynStore/administrar/vino" class="btn btn-danger">Cancelar</a>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </div>
@@ -130,7 +130,7 @@
                                 <option value="Pantalon">Pantalon</option>
                                 <option value="Chaqueta">Chaqueta</option>
                                 <option value="Vestido">Vestido</option>
-                              
+
                             </select>
                             <small id="tallaHelp" class="form-text text-muted">Categoria del Producto.</small>
                         </div>
@@ -145,7 +145,7 @@
                             </select>
                             <small id="tallaHelp" class="form-text text-muted">Tipo del Producto.</small>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="color">Color</label>
                             <input required type="text" class="form-control" name="color" id="color_e" placeholder="Ingrese el color">
@@ -177,8 +177,12 @@
                             <input  required type="text" class="form-control" name="precio" id="precio_e" aria-describedby="precioHelp" placeholder="Ingrese el precio">
                             <small id="precioHelp" class="form-text text-muted">Precio del Producto.</small>
                         </div>
-
-                        <div class="modal-footer">
+                        <div class="form-group" id="divBaja">
+                            <label for="estado">Activar / Dar Baja</label>
+                            <input  type="checkbox" name="estado" id="estado" value="1" /><br>
+                            <small> Seleccione unicamente si desea Dar de Baja, caso contrario deje desmarcado </small>
+                        </div>
+                        <div class="form-group">
                             <a href="/josselynStore/administrar/producto" class="btn btn-danger">Cancelar</a>
                             <button type="submit" class="btn btn-primary">Guardar</button>
                         </div>
@@ -189,6 +193,22 @@
     </div>
 </div>
 
+<div class="col-12">
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-2">
+                <form action="/josselynStore/administrar/producto/todos" method="get">
+                    <button type="submit" class="btn btn-warning">LISTAR TODOS</button>
+                </form>
+            </div>
+            <div class="col col-lg-2">
+                <form action="/josselynStore/administrar/producto" method="get">
+                    <button type="submit" class="btn btn-warning">LISTAR ACTIVOS</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row" style="margin-top: 25px; margin-left: 50px; margin-right: 50px;">
 
     <table class="table">
@@ -213,37 +233,49 @@
                         </div>
                     </form> 
                 </td>
-                 <td>{{ producto.categoria }}</td>
+                <td>{{ producto.categoria }}</td>
                 <td>{{ producto.tipo }}</td>
                 <td>{{ producto.nombre }}</td>
                 <td>{{ producto.color }}</td>
                 <td>{{ producto.talla }}</td>
                 <td>{{ producto.precio }}</td>
-                <td> True </td>
+                <td>{{ producto.estado }}</td>
                 <td>
                     <a href="#" id="{{ i }}" class="btn btn-primary" data-toggle="modal" data-target="#modal_e">Modificar</a>
-                  
-                </td>
-                  <script>
-                       
-                          t("#{{ i }}").click(function () {
-                             console.log("holi....");
-                            t("#external").val("{{ producto.external_id }}");
-                            t("#nombre_e").val("{{ producto.nombre }}");
-                            t("#tipo_e").val("{{ producto.tipo }}");
-                            t("#talla_e").val("{{ producto.talla }}");
-                            t("#color_e").val("{{ producto.color }}");
-                            t("#categoria_e").val("{{ producto.categoria }}");
-                            t("#descripcion_e").val("{{ producto.descripcion }}");
-                            t("#cantidad_e").val("{{ producto.cantidad }}");
-                            t("#precio_e").val("{{ producto.precio }}");
 
-                        });  
-         
-                       
-                    </script> 
-            </tr>
-            {{/each}}
+                </td>
+        <script>
+
+            $("#{{ i }}").click(function () {
+                console.log("holi....");
+                $("#external").val("{{ producto.external_id }}");
+                $("#nombre_e").val("{{ producto.nombre }}");
+                $("#tipo_e").val("{{ producto.tipo }}");
+                $("#talla_e").val("{{ producto.talla }}");
+                $("#color_e").val("{{ producto.color }}");
+                $("#categoria_e").val("{{ producto.categoria }}");
+                $("#descripcion_e").val("{{ producto.descripcion }}");
+                $("#cantidad_e").val("{{ producto.cantidad }}");
+                $("#precio_e").val("{{ producto.precio }}");
+
+
+            });
+
+            $("#estado").on('change', function () {
+                if ($(this).is(':checked')) {
+                    $('#btn').html('Dar de Baja');
+                    $(this).attr('value', '0');
+                } else {
+                    $('#btn').html('Editar');
+                    $(this).attr('value', '1');
+                }
+                $('#estado').text($('#estado').val());
+            });
+
+
+        </script> 
+        </tr>
+        {{/each}}
         </tbody>
 
     </table>

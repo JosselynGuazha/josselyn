@@ -10,7 +10,7 @@ class MarcaController {
             //console.log(marcas + "Ok...");
             res.render('fragmentos/frm_registroMarca',
                     {titulo: "Administracion de Marcas",
-                       //rol: req.user.rol,
+                       rol: req.user.rol,
                         lista: marcas,
                         login: req.isAuthenticated()
                         //info: (req.flash('info') != '') ? req.flash('info') : '',
@@ -40,7 +40,9 @@ class MarcaController {
     
     modificar(req, res) {
         Marca.update({            
-            nombre: req.body.nombre
+            nombre: req.body.nombre,
+            estado: req.body.estado
+            
         }, {where: {external_id: req.body.external}}).then(function (updatedMarca, created) {
             if(updatedMarca) {
                 req.flash('info', 'Se ha creado correctamente', false);

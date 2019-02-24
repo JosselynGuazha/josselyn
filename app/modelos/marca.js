@@ -13,6 +13,7 @@ module.exports=function(sequelize, Sequelize){
     external_id:{
         type: Sequelize.UUID
     }
+   
     
 }, {timestamps:false,
     freezeTableName:true});

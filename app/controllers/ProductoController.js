@@ -15,10 +15,11 @@ class ProductoController {
 
         var roles = req.user.rol;
         if (roles === "administrador") {
-            Producto.findAll({include: {model: Marca}}).then(function (productos) {
+            Producto.findAll({include: {model: Marca},where:{estado:true}}).then(function (productos) {
                 if (req.session.carrito == undefined) {
                     req.session.carrito = [];
                     console.log("************");
+
 
                 }
                 console.log(req.session.carrito);
@@ -41,7 +42,7 @@ class ProductoController {
                 res.redirect('/josselynStore');
             });
         } else {
-            Producto.findAll({include: {model: Marca}}).then(function (productos) {
+            Producto.findAll({include: {model: Marca},where:{estado:true}}).then(function (productos) {
                 if (req.session.carrito == undefined) {
                     req.session.carrito = [];
                     console.log("************");
@@ -54,6 +55,7 @@ class ProductoController {
 
                             rol: req.user.nombre,
                             lista: productos,
+
                             login: req.isAuthenticated()
                                     //info: (req.flash('info') != '') ? req.flash('info') : '',
                                     //error: (req.flash('error') != '') ? req.flash('error') : ''
@@ -71,30 +73,31 @@ class ProductoController {
 
 
     }
-    
-    verPrincipal(req, res) {
-        
-        if(req.isAuthenticated()){
-        res.redirect('/josselynStore/inicio');
-    }else{
-        Producto.findAll({include: {model: Marca}}).then(function (productos) {
-            res.render('fragmentos/frm_areacenter',
-                    { 
-                        lista: productos,
-                         title: 'Josselyn`s Store',
-                         login: req.isAuthenticated()
-                    });
-        });
-    }
 
-        
+    verPrincipal(req, res) {
+
+        if (req.isAuthenticated()) {
+            res.redirect('/josselynStore/inicio');
+        } else {
+            
+            Producto.findAll({include: {model: Marca},where:{estado:true}}).then(function (productos) {
+                res.render('fragmentos/frm_areacenter',
+                        {
+                            lista: productos,
+                            title: 'Josselyn`s Store',
+                            login: req.isAuthenticated()
+                        });
+            });
+        }
+
+
     }
 
     verProducto(req, res) {
 
 
         Marca.findAll().then(function (marcas) {
-            Producto.findAll({include: {model: Marca}}).then(function (productos) {
+            Producto.findAll({include: {model: Marca}, where: {estado: true}}).then(function (productos) {
                 res.render('fragmentos/frm_registroProducto',
                         {titulo: "Administracion de Productos",
 
@@ -114,6 +117,34 @@ class ProductoController {
         });
 
 
+
+    }
+
+    verProductoTodos(req, res) {
+
+        if (req.user.rol === "administrador") {
+            Marca.findAll().then(function (marcas) {
+                Producto.findAll({include: {model: Marca}}).then(function (productos) {
+                    res.render('fragmentos/frm_registroProducto',
+                            {titulo: "Administracion de Productos",
+
+                                //rol: req.user.rol,
+                                lista: productos,
+                                listaM: marcas,
+                                login: req.isAuthenticated()
+                                        //info: (req.flash('info') != '') ? req.flash('info') : '',
+                                        //error: (req.flash('error') != '') ? req.flash('error') : ''
+                            });
+
+                }).catch(function (err) {
+                    console.log("Error:", err);
+                    req.flash('error', 'Hubo un error');
+                    res.redirect('/josselynStore');
+                });
+            });
+        } else {
+            res.redirect('/josselynStore/administrar/producto');
+        }
 
     }
     //comprobar si esta como usuario o como abministrador
@@ -192,14 +223,15 @@ class ProductoController {
         Producto.update({
             external_id: uuidv4(),
             nombre: req.body.nombre,
-          categoria: req.body.categoria,         
+            categoria: req.body.categoria,
             tipo: req.body.tipo,
             talla: req.body.talla,
             cantidad: req.body.cantidad,
             descripcion: req.body.descripcion,
             precio: req.body.precio,
             color: req.body.color,
-            id_marca: req.body.marca
+            id_marca: req.body.marca,
+            estado: req.body.estado
         }, {where: {external_id: req.body.external}}).then(function (updatedProducto, created) {
             if (updatedProducto) {
                 req.flash('info', 'Se ha creado correctamente', false);
@@ -209,23 +241,39 @@ class ProductoController {
     }
 
     guardarImagen(req, res) {
-        
-        console.log(req.params.external);
-         Producto.update({
-         foto: req.body.foto
-         }, {where: {external_id: req.params.external}}).then(function (updateProducto, created) {
-         if (updateProducto) {
-         console.log("Se ha subido correctamente");
-         req.flash('info', 'Se ha subido correctamente', false);
-         res.redirect('/josselynStore/administrar/producto');
-         } else
-         {
-         console.log("Hola soy---");
-         }
-         });
-    }
-  
 
+        console.log(req.params.external);
+        Producto.update({
+            foto: req.body.foto
+        }, {where: {external_id: req.params.external}}).then(function (updateProducto, created) {
+            if (updateProducto) {
+                console.log("Se ha subido correctamente");
+                req.flash('info', 'Se ha subido correctamente', false);
+                res.redirect('/josselynStore/administrar/producto');
+            } else
+            {
+                console.log("Hola soy---");
+            }
+        });
+    }
+
+    verBuscarCategoria(req, res) {
+
+        
+            Producto.findAll({where: {estado: true, categoria: req.body.buscar}}).then(function (producto) {
+                res.render('fragmentos/frm_areacenter',
+                        {titulo: 'Administrar Producto',
+                            lista: producto
+                        });
+            }).catch(function (err) {
+                console.log("Error:", err);
+                //req.flash('error', 'Hubo un error');
+                res.redirect('');
+            });
+      
+
+
+    }
 }
 module.exports = ProductoController;
 
