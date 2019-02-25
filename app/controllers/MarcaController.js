@@ -3,6 +3,14 @@ var modelos = require('../modelos');
 var Marca = modelos.marca;
 const uuidv4 = require('uuid/v4');
 class MarcaController {
+    /**
+     * Ver Marca
+     * @sección de Marca
+     *  @type  get
+     * @url  /josselynStore/administrar/marca
+     *  @param {string} req   
+     *  @param  {string} res
+     **/
     verMarca(req, res) {
         console.log("********");
         Marca.findAll({}).then(function (marcas) {
@@ -10,11 +18,9 @@ class MarcaController {
             //console.log(marcas + "Ok...");
             res.render('fragmentos/frm_registroMarca',
                     {titulo: "Administracion de Marcas",
-                       rol: req.user.rol,
+                       rol: req.user.nombre,
                         lista: marcas,
                         login: req.isAuthenticated()
-                        //info: (req.flash('info') != '') ? req.flash('info') : '',
-                        //error: (req.flash('error') != '') ? req.flash('error') : ''
                     });
 
         }).catch(function (err) {
@@ -24,11 +30,18 @@ class MarcaController {
         });
         
     }
-    
+    /**
+     * Gurdar Marca
+     * @sección de Marca
+     *  @type  post
+     * @url  /josselynStore/administrar/marca/guardar
+     *  @param {string} req   
+     *  @param  {string} res
+     **/
     guardar(req, res) {
         Marca.create({
             external_id: uuidv4(),
-            nombre: req.body.nombre
+            nombre: req.body.nombre            
         }).then(function (newMarca, created) {
             if(newMarca) {
                 req.flash('info', 'Se ha creado correctamente');
@@ -37,7 +50,14 @@ class MarcaController {
             }
         });
     }
-    
+     /**
+     * Modificar Marca
+     * @sección de Marca
+     *  @type  post
+     * @url  /josselynStore/administrar/marca/modificar
+     *  @param {string} req   
+     *  @param  {string} res
+     **/
     modificar(req, res) {
         Marca.update({            
             nombre: req.body.nombre,

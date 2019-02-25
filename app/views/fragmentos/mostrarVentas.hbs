@@ -1,0 +1,26 @@
+
+<h1 style="margin-top: 20px; margin-left: 700px; margin-right: 70px;">Ventas</h1>
+<div class="row" >
+
+    <table class="table" style=" margin-top: 20px; margin-left: 200px; margin-right: 200px;">
+        <thead>
+            <tr>
+                <th>Nro</th><th>Nombre</th><th>SubTotal</th><th>Iva</th><th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each lista as |venta i|}}
+            <tr>
+                <th scope="row">{{ i }}</th>             
+                <td>{{ venta.persona.nombre }} {{ venta.persona.apellido }} </td>
+                <td>$ {{ venta.subtotal }}</td>
+                <td>$ {{ venta.iva }}</td>
+                <td>$ {{ venta.total }}</td>
+        </tr>
+        {{/each}}
+        </tbody>
+
+    </table>
+
+</div>
+

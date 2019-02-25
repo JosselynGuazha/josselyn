@@ -1,0 +1,51 @@
+<script type="text/javascript" src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
+<script type="text/javascript" src="/js/html2canvas.js"></script>
+<script type="text/javascript">
+    function PDF() {
+        $('#Descargar').attr('style', 'visibility: hidden');
+        html2canvas(document.getElementById('comprobante')).then(function (canvas) {
+            var img = canvas.toDataURL('image/png');
+            var doc = new jsPDF();
+            doc.addImage(img, 'JPEG', 10, 10);
+            doc.save('test.pdf');
+        });
+    }
+
+</script>
+<body>
+    <div class="gallery">
+        <div id="comprobante">
+
+            <div class="card-header" style="margin-top: 25px; margin-left: 20px; margin-right: 700px;">
+                <h5 style="margin-top: 25px; margin-left: 200px;">Comprobante de Venta</h5>
+                <div class="card-body" style="margin-top: 25px; margin-left: 200px;"> <img src="/img/fav-icon.png" alt="" width='70' height="50"> <h5><b>JOSSELYN`S STORE</b></h5></div>
+                <table class="table" style=" margin-left: px; margin-right: 100px; margin-top:25px;">
+
+                    <thead>
+                    <div >
+                        <h6 style=" margin-left: 25px; margin-right: 100px; margin-top:75px;"> <b>Nombre:</b> {{rol}}</h6>
+                    </div>
+                    <tr>
+                        <th>Nro</th><th>Nombre</th><th>Cantidad</th><th>Precio Unitario</th><th>Precio Total</th>
+                    </tr>
+                    </thead>
+                    {{#each lista as |detalle i|}}
+                    <tbody>
+                    <th scope="row">{{ i }}</th>
+                    <td>{{ detalle.producto.nombre }}</td>
+                    <td>{{ detalle.cantidad }}</td>
+                    <td>{{ detalle.precio_unitario}}</td>
+                    <td>{{ detalle.precio_total}}</td>
+                    
+                    </tbody>    
+                    {{/each}}
+                    <tr><td></td><td></td><td></td><td><b> Subtotal</b> </td><td>{{ subtotal }}</td></tr>
+                    <tr><td></td><td></td><td></td><td><b>  Iva</b></td><td>{{iva}}</td></tr>
+                    <tr><td></td><td></td><td></td><td><b> Total</b></td><td>{{ total}}</td></tr>
+                </table>
+            </div>
+        </div>
+        <div id="Descargar" class="btn btn-primary" style=" margin-left: 550px; margin-right: 75px; "><a href="javascript:PDF()">Descargar</a></div>
+
+    </div>
+</body>

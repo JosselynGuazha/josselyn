@@ -20,9 +20,6 @@ module.exports = function (sequelize, Sequelize){
         iva:{
             type:Sequelize.DOUBLE
         },
-        descuento: {
-            type: Sequelize.DOUBLE
-        },
         total: {
             type: Sequelize.DOUBLE
         },

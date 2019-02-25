@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "api-doc-generator": "0.0.2",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
     "connect": "^3.6.6",
@@ -17,9 +18,7 @@
     "express-formidable": "^1.2.0",
     "express-session": "^1.15.6",
     "flash": "^1.1.0",
-    "formidable": "^1.2.1",
     "hbs": "~4.0.1",
-    "html-pdf": "^2.2.0",
     "http-errors": "~1.6.2",
     "morgan": "~1.9.0",
     "mysql2": "^1.6.4",

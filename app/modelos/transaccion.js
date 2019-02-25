@@ -8,7 +8,11 @@ module.exports = function (sequelize, Sequelize){
         },
         tipo_tarjeta: {
             type: Sequelize.STRING
+        },
+        digitos: {
+            type: Sequelize.STRING
         }
+        
     }, {freezeTableName: true, timestamps: false});
     
     Transaccion.associate = function (modelos){

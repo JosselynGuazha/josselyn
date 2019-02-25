@@ -8,12 +8,12 @@
     </br>
 
     <header    data-textAlign="['left','left','left','left','left','center']" >
-        <h2>Registro de Marca</h2>
+        <h2 style=" margin-top: 20px; margin-left: 200px; margin-right: 200px;">Registro de Marca</h2>
     </header>
     </br>
 
-    <div class="row" style="margin-top: 25px; margin-left: 50px; margin-right: 50px;" >
-        <a href="#"  class="btn btn-success" data-toggle="modal" data-target="#modal">Nuevo</a>
+    <div class="row" >
+        <a href="#"  style=" margin-top: 20px; margin-left: 200px; margin-right: 200px;" class="btn btn-success" data-toggle="modal" data-target="#modal">Nuevo</a>
     </div>
 
     <!-- Modal -->
@@ -69,7 +69,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal_e">Cerrar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </div>
 
@@ -80,7 +80,7 @@
 
     <div class="row" style="margin-top: 25px; margin-left: 50px; margin-right: 50px;">
 
-        <table class="table">
+        <table class="table" style=" margin-top: 20px; margin-left: 200px; margin-right: 200px;">
             <thead>
                 <tr>
                     <th>Nro</th><th>Nombre</th><th>Estado</th><th>Acciones</th>
@@ -100,17 +100,17 @@
                     $("#external").val("{{ marca.external_id }}");
                     $("#nombre_e").val("{{ marca.nombre }}");
                 });
-                
+
                 $("#estado").on('change', function () {
-                if ($(this).is(':checked')) {
-                    $('#btn').html('Dar de Baja');
-                    $(this).attr('value', '0');
-                } else {
-                    $('#btn').html('Editar');
-                    $(this).attr('value', '1');
-                }
-                $('#estado').text($('#estado').val());
-            });
+                    if ($(this).is(':checked')) {
+                        $('#btn').html('Dar de Baja');
+                        $(this).attr('value', '0');
+                    } else {
+                        $('#btn').html('Editar');
+                        $(this).attr('value', '1');
+                    }
+                    $('#estado').text($('#estado').val());
+                });
             </script> 
             </tr>
             {{/each}}

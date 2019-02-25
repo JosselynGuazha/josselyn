@@ -1,18 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+        <file>
+            <url>app/modelos/venta.js</url>
+            <bookmark id="1">
+                <name/>
+                <line>0</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/controllers/MarcaController.js</file>
             <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/controllers/ProductoController.js</file>
-            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/config/routes.js</file>
+            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/controllers/VentaController.js</file>
             <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/views/layout.hbs</file>
             <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/views/fragmentos/frm_direccion_cliente_1.hbs</file>
-            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/views/fragmentos/frm_registroProducto.hbs</file>
-            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/views/fragmentos/frm_registroMarca.hbs</file>
+            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/views/fragmentos/reporte.hbs</file>
+            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/views/fragmentos/carrito.hbs</file>
+            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/modelos/rol.js</file>
+            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/controllers/CarritoController.js</file>
+            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/config/routes.js</file>
+            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/controllers/ModificarUsuario.js</file>
             <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/modelos/venta.js</file>
-            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/modelos/producto.js</file>
-            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/views/fragmentos/frm_areacenter.hbs</file>
+            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/config/users.js</file>
+            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/views/fragmentos/frm_direccion_cliente.hbs</file>
+            <file>file:/C:/Users/Josselyn/Desktop/TiendaJosselyn/app/controllers/DireccionController.js</file>
         </group>
     </open-files>
 </project-private>

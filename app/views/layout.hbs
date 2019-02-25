@@ -171,7 +171,7 @@ $(document).ready(function () {
                             <ul class="top_right">
                                 {{#if login}}
                                 <li class="user"><a href="/josselynStore/cerrar_session" ><i class="icon-user icons"> Cerrar Sesion</i></a></li></br>
-                                <li class="user"><a href=""><i class="icon-pencil icons"> Editar Perfil</i></a></li></br>
+                                <li class="user"><a href="/josselynStore/ver/perfil"><i class="icon-pencil icons"> Editar Perfil</i></a></li></br>
 
                                 <li><a href="#"><i id="nro_items" class="icon-handbag icons">0</i></a></li>
                                 <li class="h_price">
@@ -206,18 +206,7 @@ $(document).ready(function () {
 
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav">
-                            <li class="nav-item dropdown submenu active">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Categoria   <i class="fa fa-angle-down" aria-hidden="true"></i>
-                                </a>
-                                {{#each lista}}
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link"  href="#">{{categoria}}</a></li>  
-                                </ul>
-                                {{/each}}
-                            </li>
-                        </ul>
+
 
                         <ul class="navbar-nav">
                             {{#if roles}}
@@ -227,21 +216,23 @@ $(document).ready(function () {
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item"><a class="nav-link"  href="/josselynStore/administrar/marca">Registro de Marcas</a></li>                                   
-                                    <li class="nav-item"><a class="nav-link"  href="/josselynStore/administrar/producto">Registro de Productos </a></li>   
+                                    <li class="nav-item"><a class="nav-link"  href="/josselynStore/administrar/producto">Registro de Productos </a></li>  
+                                    <li class="nav-item"><a class="nav-link"  href="/josselynStore/mostrar/ventas">Mostrar Ventas</a></li>   
+
                                 </ul>
                             </li>
                             {{/if }}
                         </ul>
+                        <div>
+                            <h5 style=" margin-left: 500px; margin-right: 75px; margin-top: 20px;"> Bienvenido {{rol}}</h5>
+                        </div>
                     </div>
                 </nav>
             </div>
         </header>
-      
-        <form class="example" action="/buscar/categoria" method="POST" style=" margin-left: 200px; margin-right: 75px; margin-top: 20px;">
-                <input type="text" placeholder="Search.." name="buscar">
-                <button type="submit"><i class="fa fa-search"></i></button>
-            </form>
-    
+
+
+
         <!--================End Menu Area =================-->
 
         {{{body}}}

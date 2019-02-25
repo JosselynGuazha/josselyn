@@ -10,6 +10,14 @@ module.exports = function (passport, cuenta, persona, rol) {
         done(null, cuenta.id);
     });
     // used to deserialize the user
+    /**
+     * Inicio Session
+     * @sección de Usuario
+     *  @type  get
+     * @url /josselynStore/login
+     *  @param  {string} req cuenta
+     *   @param  {string} res redirecciona hacia informacion del usuario
+     **/
     passport.deserializeUser(function (id, done) {
         Cuenta.findOne({where: {id: id}, include: [{model: Persona, include: {model: Rol}}]}).then(function (cuenta) {
             if (cuenta) {                
@@ -29,6 +37,15 @@ module.exports = function (passport, cuenta, persona, rol) {
 
     }); 
     //registro de usuarios por passport
+    /**
+     * Registro Usuario
+     * @sección de Usuario
+     *  @type  get
+     * @url /josselynStore/registro
+     *  @param  {string} req cuenta
+     *   @param  {string} res redirecciona hacia informacion del usuario
+     **/
+    
     passport.use('local-signup', new LocalStrategy(
             {
                 usernameField: 'correo', //lo que esta como name en el input del registro
@@ -66,7 +83,6 @@ module.exports = function (passport, cuenta, persona, rol) {
                                             correo: email,
                                             cedula: req.body.cedula,
                                             telefono: req.body.telefono,
-                                            direccion: req.body.direccion,
                                             external_id: uuidv4(),
                                             id_rol: rol.id
                                         };
@@ -129,6 +145,14 @@ module.exports = function (passport, cuenta, persona, rol) {
             }
     ));
     //inicio de sesion
+    /**
+     * inicio Session
+     * @sección de Usuario
+     *  @type  get
+     * @url /josselynStore/login
+     *  @param  {string} req cuenta
+     *   @param  {string} res redirecciona hacia inicio
+     **/
     passport.use('local-signin', new LocalStrategy(
             {
                 usernameField: 'correo',

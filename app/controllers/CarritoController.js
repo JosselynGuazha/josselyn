@@ -4,13 +4,27 @@ var Producto = modelos.producto;
 var Marca = modelos.marca;
 
 class CarritoController {
+/**
+     * Ver Carrito
+     * @sección de Carrito
+     *  @type  get
+     * @url /josselynStore/compra/carrito/obtener
+     *  @param  {string} res session carrito
+     **/
     mostrarCarrito(req, res) {
         console.log("holasssss");
         res.status(200).json(req.session.carrito);
         //res.send({msg:"Hola"});
         console.log("q paso");
     }
-
+    /**
+     * Cargar Carrito
+     * @sección de Carrito
+     *  @type  get
+     * @url /josselynStore/compra/carrito/obtener
+     *  @param  {string} req session carrito
+     *   @param  {string} res session carrito
+     **/
     cargarCarro(req, res) {
         console.log("cargarCarro");
         var carrito = req.session.carrito;
@@ -35,6 +49,7 @@ class CarritoController {
             res.status(500).json(err);
         });
     }
+    
     static verificar(lista, external) {
         var pos = -1;
         for (var i = 0; i < lista.length; i++) {
@@ -45,7 +60,14 @@ class CarritoController {
         }
         return pos;
     }
-
+  /**
+     * quitar del Carrito
+     * @sección de Carrito
+     *  @type  get
+     * @url /josselynStore/compra/carrito/quitar
+     *  @param  {string} req external_id
+     *   @param  {string} res session carrito
+     **/
     quitar_item(req, res) {
         var carrito = req.session.carrito;
         var external = req.params.external;
@@ -69,7 +91,14 @@ class CarritoController {
             res.status(200).json(req.session.carrito);
         }
     }
-
+/**
+     * agregar del Carrito
+     * @sección de Carrito
+     *  @type  get
+     * @url /josselynStore/compra/carrito/agregar
+     *  @param  {string} req external_id
+     *   @param  {string} res session carrito
+     **/
     agregar_item(req, res) {
         var carrito = req.session.carrito;
         var external = req.params.external;
