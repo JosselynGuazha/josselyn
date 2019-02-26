@@ -3,6 +3,7 @@
 var models = require('../modelos');
 var Persona = models.persona;
 var Cuenta = models.cuenta;
+var Venta = models.venta;
 var Rol = models.rol;
 const uuidv4 = require('uuid/v4');
 var bCrypt = require('bcrypt-nodejs');
@@ -47,8 +48,7 @@ class ModificarUsuario {
                 res.render('fragmentos/editarUsuario',
                         {titulo: 'Modificar perfil personal',
                             persona: persona,
-                            session: req.isAuthenticated(),
-                            exito: req.flash("exito")
+                            login: req.isAuthenticated()
                         });
             });
         } else {
@@ -58,12 +58,15 @@ class ModificarUsuario {
                 res.render('fragmentos/editarUsuario',
                         {titulo: 'Modificar perfil personal',
                             persona: persona,
+                            rol:req.user.nombre,
                             roles: "admin",
-                            session: req.isAuthenticated(),
-                            exito: req.flash("exito")
+                            login: req.isAuthenticated()
                         });
             });
         }
+    }
+     static eliminarVenta(idVenta){
+        Venta.destroy({where:{estado:false}});
     }
     /**
      * Modificar Perfil
@@ -106,6 +109,24 @@ class ModificarUsuario {
 
         });
 
+    }
+    /**
+     * Guardar Token
+     * @sección de Cuenta
+     *  @type  get
+     * @url /guardar_token/:token
+     *  @param {string} modelo cuenta
+     *  @param  {string} res mensage
+     **/
+    guardarToken(req, res) {
+        var token = req.params.token;
+        Cuenta.update({
+            token: token
+        }, {where: {external_id: req.user.id_cuenta}}).then(function (updatedToken, created) {
+            if (updatedToken) {
+                console.log(updatedToken);
+            }
+        });
     }
 
 }

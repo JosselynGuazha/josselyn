@@ -14,7 +14,7 @@ class DireccionController {
      *  @type  get
      * @url /josselynStore/envio/direccion
      *  @param {string} req Persona y direccion
-     *  @param  {string} res 
+     *  @param  {string} res  redirecciona a la direccion
      **/
     verDireccion(req, res) {
         console.log("********");
@@ -27,7 +27,7 @@ class DireccionController {
                         Direccion.findAll({where: {id_persona: persona.id}}).then(function (direcciones) {
                             res.render('fragmentos/frm_direccion_cliente',
                                     {titulo: "Registro de Direccion",
-                                        rol: req.user.rol,
+                                        rol: req.user.nombre,
                                         lista: direcciones,
                                         login: req.isAuthenticated()
                                     });
@@ -36,7 +36,7 @@ class DireccionController {
                     } else {
                         res.render('fragmentos/frm_direccion_cliente_1',
                                 {titulo: "Registro de Direccion",
-                                    rol: req.user.rol,
+                                    rol: req.user.nombre,
                                     login: req.isAuthenticated()
                                 });
                     }
@@ -53,6 +53,10 @@ class DireccionController {
 
         });
 
+    }
+    
+     static eliminarVenta(idVenta){
+        Venta.destroy({where:{estado:false}});
     }
     /**
      * Guardar Direccion

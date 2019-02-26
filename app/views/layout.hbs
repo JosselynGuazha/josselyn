@@ -207,9 +207,9 @@ $(document).ready(function () {
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-
+                        {{#if roles}}
                         <ul class="navbar-nav">
-                            {{#if roles}}
+
                             <li class="nav-item dropdown submenu active">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Administrar <i class="fa fa-angle-down" aria-hidden="true"></i>
@@ -221,8 +221,10 @@ $(document).ready(function () {
 
                                 </ul>
                             </li>
-                            {{/if }}
-                        </ul>
+<button class="btn btn-danger"><a href="#"  onclick="enviarToken()">TOKEN</a></button>
+
+                        </ul> 
+                        {{/if }}
                         <div>
                             <h5 style=" margin-left: 500px; margin-right: 75px; margin-top: 20px;"> Bienvenido {{rol}}</h5>
                         </div>

@@ -2,6 +2,7 @@
 var modelos = require('./../modelos');
 var Producto = modelos.producto;
 var Marca = modelos.marca;
+var Venta=modelos.venta;
 
 class CarritoController {
 /**
@@ -16,6 +17,9 @@ class CarritoController {
         res.status(200).json(req.session.carrito);
         //res.send({msg:"Hola"});
         console.log("q paso");
+    }
+     static eliminarVenta(idVenta){
+        Venta.destroy({where:{estado:false}});
     }
     /**
      * Cargar Carrito

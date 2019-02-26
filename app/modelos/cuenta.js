@@ -19,6 +19,9 @@ module.exports = function (sequelize, Sequelize) {
         estado: {
             type: Sequelize.BOOLEAN,
             defaultValue: true
+        },
+        token: {
+            type: Sequelize.TEXT
         }
 
     }, {freezeTableName: true,

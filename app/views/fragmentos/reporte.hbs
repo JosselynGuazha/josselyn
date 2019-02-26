@@ -39,13 +39,14 @@
                     
                     </tbody>    
                     {{/each}}
-                    <tr><td></td><td></td><td></td><td><b> Subtotal</b> </td><td>{{ subtotal }}</td></tr>
-                    <tr><td></td><td></td><td></td><td><b>  Iva</b></td><td>{{iva}}</td></tr>
-                    <tr><td></td><td></td><td></td><td><b> Total</b></td><td>{{ total}}</td></tr>
+                    <tr><td></td><td></td><td></td><td><b> Subtotal</b> </td><td>$ {{ subtotal }}</td></tr>
+                    <tr><td></td><td></td><td></td><td><b>  Iva</b></td><td> $ {{iva}}</td></tr>
+                    <tr><td></td><td></td><td></td><td><b> Total</b></td><td>$ {{ total}}</td></tr>
                 </table>
             </div>
         </div>
-        <div id="Descargar" class="btn btn-primary" style=" margin-left: 550px; margin-right: 75px; "><a href="javascript:PDF()">Descargar</a></div>
+        
+        <div id="Descargar" class="btn btn-danger" style=" margin-left: 550px; margin-right: 75px; "><a href="javascript:PDF()">Descargar</a></div>
 
     </div>
 </body>

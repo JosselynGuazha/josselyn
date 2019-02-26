@@ -15,7 +15,7 @@ class ProductoController {
      *  @type  get
      * @url  /josselynStore
      *  @param {string} req estar autentificado
-     *  @param  {string} res
+     *  @param  {string} res area inicio
      **/
     verPrincipal(req, res) {
         if (req.isAuthenticated()) {
@@ -39,8 +39,8 @@ class ProductoController {
      * @sección de Administrador/Usuario
      *  @type  get
      * @url  /josselynStore/inicio
-     *  @param {string} req   
-     *  @param  {string} res
+     *  @param {string} req  rol del usuario 
+     *  @param  {string} res renderisa al inicio
      **/
     verInicio(req, res) {
         var roles = req.user.rol;
@@ -97,15 +97,15 @@ class ProductoController {
      * @sección de Producto
      *  @type  get
      * @url  /josselynStore/administrar/producto
-     *  @param {string} req   
-     *  @param  {string} res
+     *  @param {string} req   Modelo Marca y producto
+     *  @param  {string} res redirecciona al registro persona
      **/
     verProducto(req, res) {
         Marca.findAll().then(function (marcas) {
             Producto.findAll({include: {model: Marca}, where: {estado: true}}).then(function (productos) {
                 res.render('fragmentos/frm_registroProducto',
                         {titulo: "Administracion de Productos",
-                            //rol: req.user.rol,
+                            rol: req.user.nombre,
                             lista: productos,
                             listaM: marcas,
                             login: req.isAuthenticated()
@@ -122,13 +122,16 @@ class ProductoController {
 
 
     }
+    static eliminarVenta(idVenta){
+        Venta.destroy({where:{estado:false}});
+    }
 /**
      * Ver Todos lod Producto
      * @sección de Listar Todos Producto
      *  @type  get
      * @url  /josselynStore/administrar/producto/todos
-     *  @param {string} req   
-     *  @param  {string} res
+     *  @param {string} req  rol de la persona
+     *  @param  {string} res registro Prodcto
      **/
     verProductoTodos(req, res) {
 
@@ -138,7 +141,7 @@ class ProductoController {
                     res.render('fragmentos/frm_registroProducto',
                             {titulo: "Administracion de Productos",
 
-                                //rol: req.user.rol,
+                                rol: req.user.nombre,
                                 lista: productos,
                                 listaM: marcas,
                                 login: req.isAuthenticated()
@@ -174,7 +177,7 @@ class ProductoController {
             res.render('layout',
                     {titulo: "Administracion de Productos",
                         fragmento: 'fragmentos/frm_registroProducto',
-                        // rol: req.user.rol,
+                       rol: req.user.nombre,
                         marcas: marcas
 
                     });
@@ -191,8 +194,8 @@ class ProductoController {
      * @sección de guardar Producto
      *  @type  post
      * @url  /josselynStore/administrar/producto/guardar
-     *  @param {string} req   
-     *  @param  {string} res
+     *  @param {string} req  modelo Producto, parametros del body 
+     *  @param  {string} res renderiza administrar producto
      **/
     guardar(req, res) {
         Producto.create({
@@ -221,8 +224,8 @@ class ProductoController {
      * @sección de modificar Producto
      *  @type  post
      * @url  /josselynStore/administrar/producto/modificar
-     *  @param {string} req  
-     *  @param  {string} res
+     *  @param {string} req  parametros de body
+     *  @param  {string} res modificar y renderiza abministrar productos
      **/
   
     modificar(req, res) {
@@ -250,8 +253,8 @@ class ProductoController {
      * @sección de foto Producto
      *  @type  post
      * @url  /josselynStore/administrar/producto/guardar_foto
-     *  @param {string} req   
-     *  @param  {string} res
+     *  @param {string} req  parametros externos de una url 
+     *  @param  {string} resadministrar productos
      **/
   
     guardarImagen(req, res) {
@@ -275,14 +278,15 @@ class ProductoController {
      * @sección de buscar Producto
      *  @type  post
      * @url  /buscar/categoria
-     *  @param {string} req   
-     *  @param  {string} res
+     *  @param {string} req    encontrar producto
+     *  @param  {string} res area centrar a mostrar 
      **/
     verBuscarCategoria(req, res) {
         Producto.findAll({where: {estado: true, categoria: req.body.buscar}}).then(function (producto) {
             res.render('fragmentos/frm_areacenter',
                     {titulo: 'Administrar Producto',
-                        lista: producto
+                        lista: producto,
+                        rol: req.user.nombre
                     });
         }).catch(function (err) {
             console.log("Error:", err);

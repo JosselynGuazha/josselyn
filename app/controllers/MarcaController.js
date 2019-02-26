@@ -1,6 +1,7 @@
 'use strict';
 var modelos = require('../modelos');
 var Marca = modelos.marca;
+var Venta=modelos.venta;
 const uuidv4 = require('uuid/v4');
 class MarcaController {
     /**
@@ -8,8 +9,8 @@ class MarcaController {
      * @sección de Marca
      *  @type  get
      * @url  /josselynStore/administrar/marca
-     *  @param {string} req   
-     *  @param  {string} res
+     *  @param {string} req  Modelo Marca y autentificado 
+     *  @param  {string} res renderisa a Registra Marca
      **/
     verMarca(req, res) {
         console.log("********");
@@ -25,7 +26,6 @@ class MarcaController {
 
         }).catch(function (err) {
             console.log("Error:", err);
-            req.flash('error', 'Hubo un error');
             res.redirect('/josselynStore');
         });
         
@@ -35,8 +35,8 @@ class MarcaController {
      * @sección de Marca
      *  @type  post
      * @url  /josselynStore/administrar/marca/guardar
-     *  @param {string} req   
-     *  @param  {string} res
+     *  @param {string} req   campos del body
+     *  @param  {string} res  administrar marca
      **/
     guardar(req, res) {
         Marca.create({
@@ -50,13 +50,17 @@ class MarcaController {
             }
         });
     }
+    
+    static eliminarVenta(idVenta){
+        Venta.destroy({where:{estado:false}});
+    }
      /**
      * Modificar Marca
      * @sección de Marca
      *  @type  post
      * @url  /josselynStore/administrar/marca/modificar
-     *  @param {string} req   
-     *  @param  {string} res
+     *  @param {string} req  campos del body 
+     *  @param  {string} res redirecciona administrar marca
      **/
     modificar(req, res) {
         Marca.update({            

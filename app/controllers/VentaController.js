@@ -7,6 +7,7 @@ var Persona = models.persona;
 var Venta = models.venta;
 var Detalle = models.detalleProducto;
 const uuidv4 = require('uuid/v4');
+
 // variables para realizar pago
 var total;
 var detalle = [];
@@ -32,7 +33,7 @@ class VentaController {
     mostrarCarritoFinalizado(req, res) {
         res.render('fragmentos/carrito',
                 {titulo: "Venta",
-                    rol: req.user.rol,
+                    rol: req.user.nombre,
                     mensaje: req.flash("mensajito"),
                     login: req.isAuthenticated()
                 });
@@ -53,7 +54,7 @@ class VentaController {
                 console.log(venta);
               res.render('fragmentos/mostrarVentas',
                 {titulo: "Ventas",
-                    rol: req.user.rol,
+                    rol: req.user.nombre,
                     lista:venta,
                     mensaje: req.flash("mensajito"),
                     login: req.isAuthenticated()
@@ -176,6 +177,7 @@ class VentaController {
                 'amount': total, //total de la venta
                 'currency': 'USD',
                 'paymentType': 'DB'
+                
             });
             var options = {
                 port: 443,
@@ -202,7 +204,8 @@ class VentaController {
             console.log(responseData);
             checkout = responseData.id;
             res.render('fragmentos/pago',
-                    {Checkout: checkout});
+                    {Checkout: checkout,
+                    login: req.isAuthenticated()});
         });
 
     }

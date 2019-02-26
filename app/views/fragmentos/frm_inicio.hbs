@@ -1,5 +1,63 @@
+<script src="https://www.gstatic.com/firebasejs/5.8.4/firebase.js"></script>
 <script>
-    
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyAW0U5KzAH98dKkRP72NS6Nr6imfRJxDgw",
+        authDomain: "proyectofinal-23ccb.firebaseapp.com",
+        databaseURL: "https://proyectofinal-23ccb.firebaseio.com",
+        projectId: "proyectofinal-23ccb",
+        storageBucket: "proyectofinal-23ccb.appspot.com",
+        messagingSenderId: "258270921674"
+    };
+    firebase.initializeApp(config);
+    // fire base mensajes
+    var messaging = firebase.messaging();
+    messaging.usePublicVapidKey('BAJGUINyyyQ2HUPkJzgIBkczr39DAXdhy66lRSm-nNV7dRqEOKooLCp5xJ7yvzyt_GpkDY2YyucfW4_r6aiK4l8');
+    messaging.requestPermission().then(function () {
+        console.log('se ha aceptado las notificaciones');
+        messaging.getToken().then(function (currentToken) {
+            if (currentToken) {
+                console.log(currentToken);
+                //guardar token
+                $.ajax({
+                    url: '/guardar_token/' + currentToken,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data, textStatus, jqXHR) {
+                        console.log("Se ha guardado token");
+                    }, error: function (jqXHR, textStatus, errorThrown) {
+
+                    }
+                });
+            } else {
+                console.log('no existe token disponible Pida permisos para generar alguno');
+            }
+        }).catch(function (err) {
+            console.log('ocurrio un error mientras se obtenia el token', err);
+            showToken('error al obtener la instancia id del token', err);
+            setTokenSentToServer(false);
+
+        });
+    }).catch(function (err) {
+        mensajeFeedBack(err);
+        console.log('no se ha recibido permiso / token : ', err);
+    });
+    messaging.onMessage(function (payload) {
+        //script para lanzar notificaciones HTML5
+        var title = payload.notification.title;
+        var extra = {
+            icon: payload.notification.icon,
+            body: payload.notification.body
+        };
+        // Lanzamos la notificación
+        var noti = new Notification(title, extra);
+        setTimeout(function () {
+            noti.close();
+        }, 5000);
+        noti.onclick = function () {
+            window.location.assign(payload.notification.click_action);
+        };
+    });
     function agregarCarrito(external) {
         var url = 'http://localhost:3000/josselynStore/compra/carrito/' + external;
         $.ajax({
@@ -13,7 +71,38 @@
             }
         });
     }
+
+    function enviarToken() {
+        $.ajax({
+            type: 'POST',
+            url: "https://fcm.googleapis.com/fcm/send",
+            headers: {
+                Authorization: 'key=' + 'AAAAPCIlg8o:APA91bEA5WgLmUDH8AmtsPw2zDeHayrCij8e2Iu8D1C4eFgUBpby3Be1ME1uM6jm5aTXvHdcXUonVQGeWLWYYYeY7Jtcl-6ci_7wpAsD3kEOFd3c81hOrgz7wh_JADq0OBVIJngIvngv'
+            },
+            contentType: 'application/json',
+            dataType: 'json',
+            collapse_key: "new_messages",
+            data: JSON.stringify({
+                "to": 'f42keH4Tmr0:APA91bESpFd_lGDPpvwYO1RdAXlfdl60MkzfySLGvW5k1AXGbbaI2-TGGMKzxZeVo_uLYijGjnz3bzDrGovmlG3MLRid-mNvE7bq3LCZAtTChos9K5wAWXZa7PjStLPwFdbkHe8q8SKS',
+                "notification": {
+                    "title": "Nuevo Producto",
+                    "body": "Se agrego un nuevo Producto",
+                    "icon": "/user.png",
+                    "click_action": "/josselynStore/inicio"
+                }
+            }),
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr.error);
+            }
+        });
+    }
+    ;
 </script>
+
+
 <form class="example" action="/buscar/categoria" method="POST" style=" margin-left: 200px; margin-right: 75px; margin-top: 20px;">
     <input type="text" placeholder="Search.." name="buscar">
     <button type="submit"><i class="fa fa-search"></i></button>
@@ -43,7 +132,7 @@
                              data-responsive_offset="on" 
                              data-frames="[{&quot;delay&quot;:10,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;&quot;,&quot;mask&quot;:&quot;x:0px;y:0px;s:inherit;e:inherit;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;y:[175%];&quot;,&quot;mask&quot;:&quot;x:inherit;y:inherit;s:inherit;e:inherit;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;}]"
                              data-textAlign="['left','left','left','left','left','center']"
-                             style="z-index: 8;font-family: Montserrat,sans-serif;font-weight:700;color:#29263a;"><img src="/img/home-slider/2017-text.png" alt=""></div>
+                             style="z-index: 8;font-family: Montserrat,sans-serif;font-weight:700;color:#29263a;"><img src="/img/home-slider/2019-text.jpg" alt=""></div>
 
                         <div class="tp-caption tp-resizeme secand_text" 
                              data-x="['right','right','right','center','center',]" 
@@ -99,7 +188,7 @@
                              data-responsive_offset="on" 
                              data-frames="[{&quot;delay&quot;:10,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;0&quot;,&quot;from&quot;:&quot;y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;&quot;,&quot;mask&quot;:&quot;x:0px;y:0px;s:inherit;e:inherit;&quot;,&quot;to&quot;:&quot;o:1;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;},{&quot;delay&quot;:&quot;wait&quot;,&quot;speed&quot;:1500,&quot;frame&quot;:&quot;999&quot;,&quot;to&quot;:&quot;y:[175%];&quot;,&quot;mask&quot;:&quot;x:inherit;y:inherit;s:inherit;e:inherit;&quot;,&quot;ease&quot;:&quot;Power2.easeInOut&quot;}]"
                              data-textAlign="['left','left','left','left','left','center']"
-                             style="z-index: 8;font-family: Montserrat,sans-serif;font-weight:700;color:#29263a;"><img src="img/home-slider/2017-text.png" alt=""></div>
+                             style="z-index: 8;font-family: Montserrat,sans-serif;font-weight:700;color:#29263a;"><img src="img/home-slider/2019-text.jpg" alt=""></div>
 
                         <div class="tp-caption tp-resizeme secand_text" 
                              data-x="['right','right','right','center','center',]" 
@@ -143,7 +232,7 @@
 <!--================Our Latest Product Area =================-->
 <section>
 
-    
+
 
     <!-- Page Content -->
     <div class="container page-top">
@@ -162,7 +251,7 @@
                         <h5 >$ {{ producto.precio }}</h5>
                         <h6>{{ producto.descripcion }}</h6>
                         <a id="{{i}}_a" class="add_cart_btn" href="#">Añadir Al carrito</a>     
-                     <script>
+                        <script>
                             $("#{{i}}_a").click(function () {
                                 agregarCarrito("{{producto.external_id}}");
                             });

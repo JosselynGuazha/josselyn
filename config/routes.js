@@ -107,6 +107,7 @@ router.get('/josselynStore/reporte', auth, ventaController.mostrarReporte);
 router.post('/josselynStore/editar/usuario', auth, usuarioController.editar);
 router.get('/josselynStore/ver/perfil', auth, usuarioController.verPerfil);
 router.post('/josselynStore/modificarPerfil', usuarioController.modificarPerfil);
+router.get('/guardar_token/:token', usuarioController.guardarToken);
 
 module.exports = router;
 
